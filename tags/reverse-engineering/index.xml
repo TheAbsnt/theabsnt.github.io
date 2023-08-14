@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reverse Engineering on TheAbsnt</title>
+    <link>https://theabsnt.github.io/tags/reverse-engineering/</link>
+    <description>Recent content in Reverse Engineering on TheAbsnt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© TheAbsnt</copyright>
+    <lastBuildDate>Mon, 14 Aug 2023 15:25:42 +0530</lastBuildDate><atom:link href="https://theabsnt.github.io/tags/reverse-engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-I)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part01/</link>
+      <pubDate>Mon, 14 Aug 2023 15:25:42 +0530</pubDate>
+      
+      <guid>https://theabsnt.github.io/posts/z2ach03/part01/</guid>
+      <description>What is up guys,
+BASE PAYLOAD (main_bin.exe) (Stage01): INSIDE main():  Following is the modified/edited Pseudocode of main() based on IDA decompiler output:  int __cdecl main(int argc, const char **argv, const char **envp) { decrypt_str_401300(str_kernel32dll); decrypt_str_401300(str_findResourceA); hMod = LoadLibraryA(str_kernel32dll); FindResourceA = GetProcAddress(hMod, str_findResourceA); decrypt_str_401300(str_loadResource); hMod = LoadLibraryA(str_kernel32dll); LoadResource = GetProcAddress(hMod, str_loadResource); decrypt_str_401300(str_sizeOfResource); hMod = LoadLibraryA(str_kernel32dll); SizeOfResource = GetProcAddress(hMod, str_sizeOfResource); decrypt_str_401300(str_lockResource); hMod = LoadLibraryA(str_kernel32dll); LockResource = GetProcAddress(hMod, str_lockResource); // gonna load the desired resource from .</description>
+    </item>
+    
+  </channel>
+</rss>
