@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html><head lang="en">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-II) - TheAbsnt</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Analysing Stage 02 of CH03 Challenge binary" />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)" />
+<meta property="og:description" content="Analysing Stage 02 of CH03 Challenge binary" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://theabsnt.github.io/posts/z2ach03/part02/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-14T15:46:46+05:30" />
+<meta property="article:modified_time" content="2023-08-14T15:46:46+05:30" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)"/>
+<meta name="twitter:description" content="Analysing Stage 02 of CH03 Challenge binary"/>
+<script src="https://theabsnt.github.io/js/feather.min.js"></script>
+	
+	
+        <link href="https://theabsnt.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://theabsnt.github.io/css/main.1f5c2e5291e313b4d22d8a955980d8deca3c51589541de041aefce33b65dea88.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://theabsnt.github.io/css/dark.8e7cf7ce38a68295559c4b37671610aa65c83760158b4154ae4510c4ae7264f9.css"  disabled />
+	
+
+	
+	
+		<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+	
+		
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+	
+
+	
+	
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+		
+		
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					renderMathInElement(document.body, {
+							delimiters: [
+									{left: "$$", right: "$$", display: true},
+									{left: "$", right: "$", display: false}
+							]
+					});
+			});
+			</script>
+	
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://theabsnt.github.io/">TheAbsnt</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		| <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+		<script src="https://theabsnt.github.io/js/themetoggle.js"></script>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)</h1>
+			<div class="meta">Posted on Aug 14, 2023</div>
+		</div>
+		
+
+		<section class="body">
+			<p>Yo Yo Yo!! Welcome back, in the part-II of analysing the challenge binary from Z2A: Ch03(Practical Analysis).</p>
+<blockquote>
+<p>I encourage you to follow this writeup along with your analysis.</p>
+</blockquote>
+<p>We gonna take a thorough look into second payload extracted from <code>.rsrc</code> section and injected into another process of stage01(<code>main_bin.exe</code>). So, let&rsquo;s get started from the <code>main</code> of this stage..</p>
+<h2 id="stage02-extracted-from-rsrc-section-of-stage01">Stage02: Extracted from <code>.rsrc</code> section of stage01</h2>
+<h2 id="inside-main">INSIDE <code>main()</code>:</h2>
+<ul>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/Pseudocode_sub_main_stage02_1_half.png"/><figcaption>
+            <h4>Fig1. decompiled main() of stage02_1</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>first gonna grab the file path of itself using <code>GetModuleFileNameA()</code>, to get the executable/file name using <code>sub_404A23</code> aka <code>strtok</code>(identified by flirt in cutter) using a loop</p>
+</li>
+<li>
+<p>with filename ie.  <code>main_bin.exe</code> (remember base payload spawned a child process of its own) in hand,  it will run another loop to get filename&rsquo;s length ie. <code>0xC</code>, then call to <code>sub_401600</code>(<code>CRC32</code> hashing), where filename being the first argument and second being the filename length, then compare it to a hard-coded hash <code>0xB925C42D</code></p>
+</li>
+<li>
+<p>if not equal then continue to call <code>sub_4010210</code>(<code>api_hash_resolving</code>) function which takes a module number among 3 ie.</p>
+</li>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/dllUsedInApiHashResolving_stage02.png"/><figcaption>
+            <h4>Fig2. dlls available to load from</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>and a hard-coded hash, then return the API function name to immediately call it in the next line <code>call eax</code>, in this case it resolves the API hash <code>8436F795h</code> (<code>IsDebuggerPresent</code>) to check if this process is being debugged or not, if being debugged then exit the process</p>
+</li>
+<li>
+<p>Otherwise, go ahead and call another anti-debugging check function <code>sub_401000</code></p>
+</li>
+<li>
+<h3 id="inside--sub_401000">INSIDE  <code>sub_401000()</code>:</h3>
+<ul>
+<li>
+<p>this at first stores a hard-coded set of hash to <code>xmm0</code> from <code>xmmword_413CE0</code> variable,</p>
+</li>
+<li>
+<p>then move on to resolve some API function using <code>sub_4010210</code> and store them in registers to call&rsquo;em later, those APIs are <code>0C1F3B876h</code>(<code>CreateToolhelp32Snapshot</code>), <code>8197004Ch</code>(<code>Process32FirstW</code>), <code>0BC6B67BFh</code>(<code>Process32NextW</code>)</p>
+</li>
+<li>
+<p>next it calls <code>CreateToolhelp32Snapshot</code>(<code>call esi</code>) to take snapshot of running process, then if successfully retrieved the handle, then call <code>Process32FirstW</code> where the first arg is handle to snapshot and second arg being a <code>PROCESSENTRY32W</code> struct after setting <code>PROCESSENTRY32W-&gt;dwSize</code> to <code>0x22C</code>(<code>556</code>),</p>
+</li>
+<li>
+<p>then move on to call <code>Process32FirstW</code> to store the info about first process from snap in <code>PROCESSENTRY32W</code> struct, then lower the string of <code>PROCESSENTRY32W-&gt;szExeName</code> <strong>(where every character is 2 bytes(aka <code>UTF-16</code>) means if string is <code>x32dbg.exe</code> then its hex will be <code>78 00 33 00 32 00 64 00 62 00 67 00 2e 00 65 00 78 00 65 00</code> ) like this, look at the dump for <code>x32dbg.exe</code> string</strong>:</p>
+</li>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/anti_debugging_1_x64dbg_sub_401000_stage02.png"/><figcaption>
+            <h4>Fig3. decompiled sub_401000 of stage02</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p><strong>contrary to previous <code>sub_401600</code> call where string chars are only 1byte  long were passed as argument means <code>x32dgb.exe</code>(<code>78 33 32 64 62 67 2e 65 78 65</code>) (pointing this out &lsquo;cause this makes difference in their hash calculated)</strong> , then calculate crc32hash to compare the hash the against hardcoded hash set of 4 stored in <code>xmm0</code> register earlier ie. (<code>7c6ffe70(processhacker.exe), 47742a22(wireshark.exe), d2f05b7d(x32dbg.exe), 659b537e(x64dbg.exe)</code> ), if not matched then call <code>Process32NextW</code> to goto the next process in snapshot, and repeat the comparision until any of&rsquo;em matches, if none of&rsquo;em matches then exit the function with return value of <code>0</code>:</p>
+</li>
+<li>
+<p>Otherwise, if any of running processes calculated hash matches to any of 4, then exit the function with return value of <code>1</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>if last function returned <code>0</code>(representing not being debugged), then move on to call <code>sub_401D50</code>, which gonna resolve some more API function and store them in for later use, with that done this calls another function <code>sub_401CA0</code></p>
+</li>
+<li>
+<h3 id="inside-sub_401ca0">INSIDE <code>sub_401CA0()</code>:</h3>
+<ul>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/Pseudocode_sub_401CA0_stage02.png"/><figcaption>
+            <h4>Fig4. decompiled sub_401CA0 of stage02</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>first set some memory of <code>0x40</code> bytes for struct <code>STARTUPINFOA</code></p>
+</li>
+<li>
+<p>then move on to decrypt some encrypted data stored in <code>xmmword_413C5C</code> and <code>xmmword_413C6C</code> ie. <code>7C6D1DBD1FEF1D5DDC6CCCBC5FEF891E</code> and <code>7CAD7CC86D1DDCAC1C4D1DEF0919FC</code> followed by a decryption loop containing shifting and xor to get string <code>C:\Windows\System32\svchost.exe</code></p>
+</li>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/string_decryption_routine_svchostPath_cyberchef.png"/><figcaption>
+            <h4>Fig5. cyberchef recipe for decrypting svchost path string</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>then create the process <code>svchost.exe</code> using <code>CreateProcessA</code> (which was resolved in earlier function)  in suspended state and returns it <code>PROCESS_INFORMATION</code> struct</p>
+</li>
+</ul>
+</li>
+<li>
+<p>moving ahead in <code>main()</code> <em>(see image below)</em>, we see a call to <code>GetModuleHandleW</code> with <code>0</code> as argument means the module address of its own(stage02) which will be <code>0x400000</code>,</p>
+</li>
+<li>
+<p>then allocate some memory space of size <code>0x18000</code>(<code>SizeOfImage</code> of stage02) using <code>VirtualAlloc</code> to copy the stage02 to allocated memory using <code>call sub_4037B0</code></p>
+</li>
+<li>
+<p>now this allocates memory of size <code>0x18000</code> in suspended <code>svchost.exe</code> using <code>VirtualAllocEx</code></p>
+</li>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/Pseudocode_sub_main_stage02_2_half.png"/><figcaption>
+            <h4>Fig6. decompiled main() of stage02_2</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>then using some loop, gonna perform base relocation(<a href="https://research32.blogspot.com/2015/01/base-relocation-table.html">Check me out for more on Base Relocation table</a>) for the copied executable based on address returned from <code>VirtualAlloc</code> call, <em><strong>tldr</strong>; this performs base relocation which needs to done when PE file is loaded to other address than image base address, in this case this is relocating the copied stage02 binary(present in <code>lpBuffer = lpMem</code>) to adjust the base relocation table with base address equal to address returned from <code>VirtualAlloc</code></em></p>
+</li>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/Pseudocode_sub_main_stage02_3_half.png"/><figcaption>
+            <h4>Fig7. decompiled main() of stage02_3</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>after relocation, call to a <code>WriteProcessMemory</code> to write the relocated stage02 in the suspended <code>svchost.exe</code>,</p>
+</li>
+<li>
+<p>then create  a remote thread in <code>svchost.exe</code> with <code>lpStartAddress</code> set to <code>sub_401DC0</code> relocated to new base address, with <code>dwCreationFlags</code> set to <code>0</code> means execute this routine immediately after creating the thread,</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>TIP:</strong> to break into <code>sub_401DCO:</code></p>
+<ul>
+<li>Now, in order to analyse this function in <code>x32dbg</code> , again attach the <code>svchost.exe</code> process before calling <code>CreateRemoteThread</code></li>
+<li>follow the subroutine address(at offset <code>0x1DC0</code>) in disassembler  and place a breakpoint there</li>
+<li>then after calling <code>CreateRemoteThread</code> in parent process, jump onto the <code>svchost.exe</code> process and resume the debugger and you&rsquo;ll break on this function, if all goes good.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>We&rsquo;ve covered enough for a quick break, see you back in a bit</em></p>
+</blockquote>
+<hr>
+<h2 id="inside-sub_401dc0">INSIDE <code>sub_401DC0()</code>:</h2>
+<blockquote>
+<p><em>Welcome back, i saw there you didn&rsquo;t had a break, nvm:) let&rsquo;s carry on..</em></p>
+</blockquote>
+<p>Now, let&rsquo;s examine this function, as this function is executed as a new thread within <code>svchost.exe</code> process:</p>
+<ul>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/Pseudocode_sub_401DC0_stage02.png"/><figcaption>
+            <h4>Fig8. decompiled sub_401DC0 of stage02</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>First, gonna resolve 4 API functions related to Internet, then gonna decrypt some encrypted data at <code>xmmword_41C7C</code> , <code>xmmword_413C8C</code>, <code>0xEA</code> using rotate left by <code>4</code>, then xor by <code>0xC5</code> to get this URL string <code>https://pastebin.com/raw/mLem9DGk</code>:</p>
+</li>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/string_decryption_routine_url1_cyberchef.png"/><figcaption>
+            <h4>Fig9. cyberchef recipe for decrypting url_1</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>now pass the decrypted URL as only argument to <code>sub_401290(getDataFromUrl)</code> which  gonna reach out to URL and return the data received ie. another URL <code>https://i.ibb.co/KsfqHym/PNG-02-Copy.png</code> of an image</p>
+</li>
+<li>
+<p>again pass the data received(another URL) to <code>sub_4013A0()</code> as only argument,</p>
+</li>
+</ul>
+<h2 id="inside-sub_4013a0">INSIDE <code>sub_4013A0()</code>:</h2>
+<ul>
+<li>
+<p>get data(<code>png</code> file) from URL passed to this function using <code>sub_401290(getDataFromUrl)</code>,</p>
+</li>
+<li>
+<p>then decrypt the data at <code>qword_413CA4</code>, <code>qword_413CAC</code> by rotating left by <code>4</code> then xor by <code>1F</code> to get string <code>\output.jpg</code> (keep endians in mind) and convert this string to <code>UTF-16</code>(wide character) by calling <code>MultiByteToWideChar</code></p>
+</li>
+<li>
+<p>resolve 4 more API function using <code>api_hash_resolving_401210</code> ie. <code>GetTempPathW</code>, <code>CreateDirectoryW</code>, <code>CreateFileW</code>, <code>WriteFile</code></p>
+</li>
+<li>
+<p>grab temporary directory path using <code>GetTempPathW</code>, to create a folder named <code>cruloader</code> using <code>CreateDirectoryW</code>, within this folder create a file named <code>output.jpg</code> and write the PNG file data received earlier using <code>WriteFile</code>,</p>
+</li>
+<li>
+<p>again decrypt data stored at <code>word_413CCC</code>, <code>qword_413CC4</code> ie. <code>8E FF EF BF 5F 6F FE 8E 9F</code> by rotating them left by <code>4</code> to xor them by <code>0x9A</code> to get string <code>redaolurc</code></p>
+</li>
+<li>
+<p>Now using loop it finds the offset of data after string <code>redaolurc</code> (at offset <code>0x41107</code>) in PNG file ie. <code>0x41110</code>, then get the size of this data ie. <code>9384bytes(0x24A8)</code> followed by another loop to decrypt the data ie. xor by <code>0x61</code> which reveals another executable say stage03</p>
+</li>
+<li>
+<p>again call <code>sub_401D50</code>  to resolve some api function related to process creation and injection, then spawn another <code>svchost.exe</code> process using same call to <code>sub_401CA0</code> as earlier, then gonna call <code>sub_401750</code></p>
+</li>
+</ul>
+<h2 id="inside-sub_401750">INSIDE <code>sub_401750()</code>:</h2>
+<ul>
+<li>
+<p>this functions takes off by capturing the thread <code>Context</code> of newly spawned child <code>svchost.exe</code> process using <code>GetThreadContext()</code>, if function returns success then proceed otherwise return 1</p>
+</li>
+<li>
+<p>on success, read the image base address of suspended <code>svchost.exe</code> from <code>PEB-&gt;ImageBaseAddress</code> using <code>ReadProcessMemory()</code></p>
+</li>
+<li>
+<p>on success, will compare the image base address of  stage03 and suspended <code>svchost.exe</code>, if equal then <code>NtUnmapViewOfSection()</code> is called to unmap view at child <code>svchost</code> image base address, otherwise if base addresses are not equal</p>
+</li>
+<li>
+<p>then move on to allocate memory of size <code>0x6000</code>(size of image of stage03) in child <code>svchos.exe</code>  using <code>VitualAllocEx</code> where <code>lpBaseAddress</code> set to <code>0x400000</code>(image base of stage03), if allocation not successfull, then retry memory allocation at any place (<code>lpBaseAddress = 0</code>), if this fails again then exit</p>
+</li>
+<li>
+<p>elsewsie, move on to replace <code>PEB-&gt;ImageBaseAddress</code> of child <code>svchost.exe</code> with allocated memory in <code>svchost.exe</code> using <code>WriteProcessMemory()</code>,</p>
+</li>
+<li>
+<p>then modify the stage-03 payload by changing value of windows subsystem(<code>IMAGE_NT_HEADERS-&gt;OptionalHeader.Subsytem</code>) from <code>3(IMAGE_SUBSYSTEM_WINDOWS_CUI)</code> to <code>2(IMAGE_SUBSYSTEM_WINDOWS_GUI)</code></p>
+</li>
+<li>
+<p>then check if previously allocated memory in child <code>svchost.exe</code>  is equal to image base address of stage03 payload, if not equal then relocation is done resp. to address allocated, otherwise if they&rsquo;re equal</p>
+</li>
+<li>
+<p>then make a jump to set the thread <code>Context-&gt;eax</code> (of child <code>svchost</code>) to the entry point(at offset <code>0x126F</code> of stage-03) then call <code>SetThreadContext</code> to set modified thread context in child svchost</p>
+</li>
+<li>
+<p>now using <code>WriteProcessMemory</code>, <code>VirtualProtectEx</code> gonna map the headers, sections with their protections of stage-03 payload to the allocated memory in child <code>svchost.exe</code>, like this:</p>
+</li>
+<li>
+<figure><img src="/assets/Z2ACH03Materials/stage03_exec_mapping_inside_child_svchost_ProcessHacker.png"/><figcaption>
+            <h4>Fig10. stage03 mapped in svchost process memory</h4>
+        </figcaption>
+</figure>
+
+</li>
+<li>
+<p>then finally call <code>ResumeThread()</code> to continue execution of child <code>svchost.exe</code> from stage03&rsquo;s entry point</p>
+</li>
+</ul>
+<hr>
+<h2 id="automations-for-this-binary">Automations for this binary:</h2>
+<h2 id="--api-hash-resolve">- API hash resolve</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># api_name_resolve.py</span>
+<span style="color:#75715e"># Author: ME :D</span>
+
+<span style="color:#f92672">import</span> pefile
+<span style="color:#f92672">import</span> zlib
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">api_hash_resolve</span>(dllToLoad, hashToResolve):
+    pe <span style="color:#f92672">=</span> pefile<span style="color:#f92672">.</span>PE(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;C:\Windows\SysWOW64\</span><span style="color:#e6db74">{</span>dllToLoad<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+
+    <span style="color:#66d9ef">for</span> exp <span style="color:#f92672">in</span> pe<span style="color:#f92672">.</span>DIRECTORY_ENTRY_EXPORT<span style="color:#f92672">.</span>symbols:
+        <span style="color:#66d9ef">if</span> exp<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
+            <span style="color:#66d9ef">if</span> zlib<span style="color:#f92672">.</span>crc32(exp<span style="color:#f92672">.</span>name) <span style="color:#f92672">==</span> int(hashToResolve, <span style="color:#ae81ff">16</span>):
+                print(exp<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>decode())
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    dllList <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;kernel32.dll&#34;</span>, <span style="color:#e6db74">&#34;ntdll.dll&#34;</span>, <span style="color:#e6db74">&#34;wininet.dll&#34;</span>]
+    
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;DLLs Available: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">0: </span><span style="color:#e6db74">{</span>dllList[<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">1: </span><span style="color:#e6db74">{</span>dllList[<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">2: </span><span style="color:#e6db74">{</span>dllList[<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+    dllNumber <span style="color:#f92672">=</span> int(input(<span style="color:#e6db74">&#34;Choose DLL number: &#34;</span>))
+    hashToResolve <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Hash(hex) to Resolve: &#34;</span>)
+
+    api_hash_resolve(dllList[dllNumber], hashToResolve)
+
+<span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;__main__&#34;</span> <span style="color:#f92672">==</span> __name__:
+    main()
+</code></pre></div><h2 id="--stage03-extractiondecryption-from-png-file-data">- Stage03 Extraction/Decryption from PNG file data:</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># stage03_extraction.py</span>
+<span style="color:#75715e"># Author: ME :D</span>
+
+<span style="color:#f92672">import</span> urllib3
+
+http <span style="color:#f92672">=</span> urllib3<span style="color:#f92672">.</span>PoolManager()
+res <span style="color:#f92672">=</span> http<span style="color:#f92672">.</span>request(<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;https://i.ibb.co/KsfqHym/PNG-02-Copy.png&#39;</span>)
+
+xored_bytes_for_executable <span style="color:#f92672">=</span> bytearray()
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> res<span style="color:#f92672">.</span>data[<span style="color:#ae81ff">0x41110</span>:]:
+    xored_bytes_for_executable<span style="color:#f92672">.</span>append(i<span style="color:#f92672">^</span><span style="color:#ae81ff">0x61</span>)
+
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;stage03.bin&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    f<span style="color:#f92672">.</span>write(xored_bytes_for_executable)
+</code></pre></div><hr>
+<h2 id="conclusion">Conclusion:</h2>
+<p>Now that we know that this stage injects itself in a created <code>svchost</code> process to execute <code>sub_401DC0</code>, which reach out to internet to get an url to get a png file which contains an executable(stage03) file which then injected to created <code>svchost</code> process, in the next part we&rsquo;ll see what stage03 is capable of.</p>
+<p>Next stage gonna blow your mind with its capability&hellip; See you there :)</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/tags/reverse-engineering">reverse engineering</a></li>
+					
+					<li><a href="/tags/zero2auto">zero2auto</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+		</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/TheAbsnt" rel="me" title="GitHub"><i data-feather="github"></i></a>
+    <a class="border"></a><a class="soc" href="https://twitter.com/TheAbsnt/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+    <a class="border"></a></div>
+  <div class="footer-info">
+    2023  © TheAbsnt |  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
+<script>
+  feather.replace()
+</script></div>
+    </body>
+</html>
