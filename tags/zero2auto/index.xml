@@ -7,17 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© TheAbsnt</copyright>
-    <lastBuildDate>Mon, 14 Aug 2023 15:46:46 +0530</lastBuildDate><atom:link href="https://theabsnt.github.io/tags/zero2auto/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Aug 2023 09:35:05 +0530</lastBuildDate><atom:link href="https://theabsnt.github.io/tags/zero2auto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part03/</link>
+      <pubDate>Thu, 17 Aug 2023 09:35:05 +0530</pubDate>
+      
+      <guid>https://theabsnt.github.io/posts/z2ach03/part03/</guid>
+      <description>Yo Yo Yo!!! What&amp;rsquo;s up guys? Hope ya all having a nice time, Welcom back! In this last part of analysing challenge binary from Z2A: Ch03(Practical Analysis). We gonna take look at mighty capabilities this binary hiding within it, So, let&amp;rsquo;s get started ..
+INSIDE main():    fig1. decompiled main() of stage03     All this stage does is display a message box and exit
+   fig2.</description>
+    </item>
+    
     <item>
       <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)</title>
       <link>https://theabsnt.github.io/posts/z2ach03/part02/</link>
       <pubDate>Mon, 14 Aug 2023 15:46:46 +0530</pubDate>
       
       <guid>https://theabsnt.github.io/posts/z2ach03/part02/</guid>
-      <description>Yo Yo Yo!! Welcome back, in the part-II of analysing the challenge binary from Z2A: Ch03(Practical Analysis).
+      <description>Yo Yo! ! Welcome back, in the part-II of analysing the challenge binary from Z2A: Ch03(Practical Analysis).
  I encourage you to follow this writeup along with your analysis.
  We gonna take a thorough look into second payload extracted from .rsrc section and injected into another process of stage01(main_bin.exe). So, let&amp;rsquo;s get started from the main of this stage..
-Stage02: Extracted from .rsrc section of stage01 INSIDE main():    Fig1.</description>
+Stage02: Extracted from .rsrc section of stage01 INSIDE main():    fig1.</description>
     </item>
     
     <item>
@@ -26,8 +37,8 @@ Stage02: Extracted from .rsrc section of stage01 INSIDE main():    Fig1.</descri
       <pubDate>Mon, 14 Aug 2023 15:25:42 +0530</pubDate>
       
       <guid>https://theabsnt.github.io/posts/z2ach03/part01/</guid>
-      <description>What is up guys, This post is walktrough of challenge binary(Chapter 03: Practical Analysis) from Zero2Auto course. In this Part-I of this series we&amp;rsquo;ll walkthrough the base binary(stage01) ie. main_bin.exe. So, let&amp;rsquo;s get started&amp;hellip;
-BASE PAYLOAD main_bin.exe (Stage01): INSIDE main():  Following is the modified/edited Pseudocode of main() based on IDA decompiler output:  int __cdecl main(int argc, const char **argv, const char **envp) { decrypt_str_401300(str_kernel32dll); decrypt_str_401300(str_findResourceA); hMod = LoadLibraryA(str_kernel32dll); FindResourceA = GetProcAddress(hMod, str_findResourceA); decrypt_str_401300(str_loadResource); hMod = LoadLibraryA(str_kernel32dll); LoadResource = GetProcAddress(hMod, str_loadResource); decrypt_str_401300(str_sizeOfResource); hMod = LoadLibraryA(str_kernel32dll); SizeOfResource = GetProcAddress(hMod, str_sizeOfResource); decrypt_str_401300(str_lockResource); hMod = LoadLibraryA(str_kernel32dll); LockResource = GetProcAddress(hMod, str_lockResource); // gonna load the desired resource from .</description>
+      <description>Yo! What is up guys, This post is walktrough of challenge binary(Chapter 03: Practical Analysis) from Zero2Auto course. This challenge tries to get you comfortable with reversing topics by covering variety of topics, to name a few, API hashing, anti-debugging, malware authors fav. PEB manipulation, process injection, thread context hijacking, basic unpacking, crypto&amp;hellip; and so on, that&amp;rsquo;s why i wanted to cover this binary
+In this Part-I of this series we&amp;rsquo;ll walkthrough the base binary(stage01) ie.</description>
     </item>
     
   </channel>
