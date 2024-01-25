@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zero2auto on TheAbsnt</title>
+    <link>https://theabsnt.github.io/tags/zero2auto/</link>
+    <description>Recent content in zero2auto on TheAbsnt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 17 Aug 2023 09:35:05 +0530</lastBuildDate>
+    <atom:link href="https://theabsnt.github.io/tags/zero2auto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part03/</link>
+      <pubDate>Thu, 17 Aug 2023 09:35:05 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/z2ach03/part03/</guid>
+      <description>Yo Yo Yo!!! What&amp;rsquo;s up guys? Welcome back.. and i hope you all are having a nice time :) In this last part of analysing challenge binary from Z2A: Ch03 (Practical Analysis). We gonna take look at mighty capabilities this binary hiding within it. So, let&amp;rsquo;s get started&#xA;Inside main() fig01. decompiled main() of stage03 All this stage does is display a message box and exit&#xA;fig02. message prompted when running stage03 Conclusion gotcha guys, i was making the hype about satge03 capabilties, jokes apart this binary just shows a message box and exit.</description>
+    </item>
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part02/</link>
+      <pubDate>Mon, 14 Aug 2023 15:46:46 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/z2ach03/part02/</guid>
+      <description>I encourage you to follow this writeup along with your analysis&#xA;Yo Yo!! Welcome back, in the part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look inside the second payload extracted from .rsrc section and injected into another process of stage01 (main_bin.exe). So, let&amp;rsquo;s get started from the main of this stage..&#xA;Stage02: Extracted from resource section of main_bin.exe Inside main() fig1. decompiled main() of stage02_1 first gonna grab the file path of itself using GetModuleFileNameA(), to get the executable/file name using sub_404A23 aka strtok(identified by flirt in cutter) using a loop</description>
+    </item>
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-I)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part01/</link>
+      <pubDate>Mon, 14 Aug 2023 15:25:42 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/z2ach03/part01/</guid>
+      <description>Yo! What is up guys, This post is walktrough of challenge binary(Chapter 03: Practical Analysis) from Zero2Auto course. This challenge tries to get you comfortable with reversing topics by covering variety of topics, to name a few, API hashing, anti-debugging, malware authors fav. PEB manipulation, process injection, thread context hijacking, basic unpacking, crypto&amp;hellip; and so on, that&amp;rsquo;s why i wanted to cover this binary&#xA;In this Part-I of this series we&amp;rsquo;ll walkthrough the base binary(stage01) ie.</description>
+    </item>
+  </channel>
+</rss>
