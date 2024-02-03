@@ -62,8 +62,8 @@
   
   
   <meta name="description" content="I encourage you to follow this writeup along with your analysis
-Yo Yo!! Welcome back, in the part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look inside the second payload extracted from .rsrc section and injected into another process of stage01 (main_bin.exe). So, let&rsquo;s get started from the main of this stage..
-Stage02: Extracted from resource section of main_bin.exe Inside main() fig1. decompiled main() of stage02_1 first gonna grab the file path of itself using GetModuleFileNameA(), to get the executable/file name using sub_404A23 aka strtok(identified by flirt in cutter) using a loop" />
+Stage02: Extracted from resource section of main_bin.exe Welcome back, in this part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look at the second payload extracted from .rsrc section and injected into another process of stage01 (main_bin.exe). So, let&rsquo;s get started from the main of this stage..
+Inside main() fig1. decompiled main() of stage02_1 first gonna grab the file path of itself using GetModuleFileNameA(), to get the executable/file name using sub_404A23 aka strtok(identified by flirt in cutter) using a loop" />
   <meta name="author" content="TheAbsnt" />
   
 
@@ -115,10 +115,10 @@ Stage02: Extracted from resource section of main_bin.exe Inside main() fig1. dec
 
   
   <link rel="icon" href="https://theabsnt.github.io/favicon.ico" />
-  <link rel="apple-touch-icon" href="https://theabsnt.github.io/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="https://theabsnt.github.io/apple-icon.png" />
 
   
-  <meta name="generator" content="Hugo 0.121.2">
+  <meta name="generator" content="Hugo 0.122.0">
 
   
   
@@ -296,8 +296,8 @@ Stage02: Extracted from resource section of main_bin.exe Inside main() fig1. dec
   </header>
 
   <section><p><strong><em>I encourage you to follow this writeup along with your analysis</em></strong></p>
-<p>Yo Yo!! Welcome back, in the part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look inside the second payload extracted from <code>.rsrc</code> section and injected into another process of stage01 (<code>main_bin.exe</code>). So, let&rsquo;s get started from the <code>main</code> of this stage..</p>
 <h1 id="stage02-extracted-from-resource-section-of-main_binexe">Stage02: Extracted from resource section of main_bin.exe</h1>
+<p>Welcome back, in this part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look at the second payload extracted from <code>.rsrc</code> section and injected into another process of stage01 (<code>main_bin.exe</code>). So, let&rsquo;s get started from the <code>main</code> of this stage..</p>
 <h1 id="inside-main">Inside main()</h1>
 <ul>
 <li>
@@ -551,7 +551,7 @@ TIP: How to break into sub_401DCO ?
 
 <hr>
 <h1 id="conclusion">Conclusion</h1>
-<p>Now that we know that this stage injects itself in a created <code>svchost</code> process to execute <code>sub_401DC0</code>, which reach out to internet to get an url to get a png file which contains an executable(stage03) file which then injected to created <code>svchost</code> process, in the next part we&rsquo;ll see what stage03 is capable of.</p>
+<p>Now that we know that this stage injects itself in a created <code>svchost</code> process to execute <code>sub_401DC0</code>, which reach out to internet to get an url to get a png file which contains an executable(stage03) file which then again injected to a created <code>svchost</code> process, in the next part we&rsquo;ll see what stage03 is capable of.</p>
 <p>Next stage gonna blow your mind with its capability&hellip; See you there :)</p>
 </section>
 
