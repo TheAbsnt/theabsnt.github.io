@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on TheAbsnt</title>
+    <link>https://theabsnt.github.io/posts/</link>
+    <description>Recent content in Posts on TheAbsnt</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Aug 2024 14:52:23 +0530</lastBuildDate>
+    <atom:link href="https://theabsnt.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SteamHide Malware Analysis - II</title>
+      <link>https://theabsnt.github.io/posts/steamhide/part02/</link>
+      <pubDate>Fri, 30 Aug 2024 14:52:23 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/steamhide/part02/</guid>
+      <description>Welcome back :D, This post is the continuation of SteamHide malware analysis, here we&amp;rsquo;ll go through the second stage FinalMalware.exe dropped by Hide binary inside image.exe downloader by decrypting the ICC profile after pulling out image from stream profile images. Let&amp;rsquo;s get started!!&#xA;Initial triage for &amp;lsquo;FinalMalware.exe&amp;rsquo; File identification Again DIE and PortexAnalyzer outputs indicates that it&amp;rsquo;s a PE 32bit .NET managed assembly file, we&amp;rsquo;ll use dnSpy for further examination</description>
+    </item>
+    <item>
+      <title>SteamHide Malware Analysis - I</title>
+      <link>https://theabsnt.github.io/posts/steamhide/part01/</link>
+      <pubDate>Fri, 30 Aug 2024 11:51:36 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/steamhide/part01/</guid>
+      <description>What&amp;rsquo;s this blog This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.&#xA;Also, this malware was an assignment for us to analysis from the course Windows Malware Analysis for Hedgehogs, huge shoutout to Karsten Hahn for this brilliant course.&#xA;So, let&amp;rsquo;s start with initial triage the most important step when analyzing a new sample</description>
+    </item>
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part03/</link>
+      <pubDate>Thu, 17 Aug 2023 09:35:05 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/z2ach03/part03/</guid>
+      <description>Welcome back.. and i hope you all are having a nice time :).&#xA;In this last part of analysing challenge binary from Z2A: Ch03 (Practical Analysis). We gonna take look at mighty capabilities this binary hiding within it. So, let&amp;rsquo;s get started&amp;hellip;&#xA;Inside &amp;lsquo;main()&amp;rsquo; All this stage does is display a message box and exit&#xA;Conclusion gotcha guys, i was making the hype about satge03 capabilties, jokes apart this binary just shows a message box and exit.</description>
+    </item>
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part02/</link>
+      <pubDate>Mon, 14 Aug 2023 15:46:46 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/z2ach03/part02/</guid>
+      <description>I encourage you to follow this writeup along with your analysis&#xA;Stage02: Extracted from resource section of main_bin.exe Welcome back, in this part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look at the second payload extracted from .rsrc section and injected into another process of stage01 (main_bin.exe). So, let&amp;rsquo;s get started from the main of this stage..&#xA;Inside &amp;lsquo;main()&amp;rsquo; first gonna grab the file path of itself using GetModuleFileNameA(), to get the executable/file name using sub_404A23 aka strtok(identified by flirt in cutter) using a loop</description>
+    </item>
+    <item>
+      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-I)</title>
+      <link>https://theabsnt.github.io/posts/z2ach03/part01/</link>
+      <pubDate>Mon, 14 Aug 2023 15:25:42 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/z2ach03/part01/</guid>
+      <description>What&amp;rsquo;s up dudes!! This post is a walktrough of challenge binary from Chapter 03: Practical Analysis from Zero2Automated: Advanced Malware Analysis course. This challenge is set to make you comfortable with malware reversing and triage by covering variety of topics like API hashing, Anti-Debugging, PEB manipulation, Process Injection, Thread Context Hijacking, Unpacking Methods, Cryptography Algorithms and so on.&#xA;Base payload main_bin.exe : Stage01 In this Part-I of this series we&amp;rsquo;ll walkthrough the base binary(stage01) ie.</description>
+    </item>
+  </channel>
+</rss>
