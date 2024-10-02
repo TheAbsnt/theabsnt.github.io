@@ -64,8 +64,12 @@
   
   
   
-  <meta name="description" content="Welcome back :D, This post is the continuation of SteamHide malware analysis, here we&rsquo;ll go through the second stage FinalMalware.exe dropped by Hide binary inside image.exe downloader by decrypting the ICC profile after pulling out image from stream profile images. Let&rsquo;s get started!!
-Initial triage for &lsquo;FinalMalware.exe&rsquo; File identification Again DIE and PortexAnalyzer outputs indicates that it&rsquo;s a PE 32bit .NET managed assembly file, we&rsquo;ll use dnSpy for further examination" />
+  <meta name="description" content="Welcome back :D,
+This post is the continuation of SteamHide malware analysis, here we&rsquo;ll go through the second stage FinalMalware.exe dropped by Hide binary inside image.exe downloader by decrypting the ICC profile after pulling out image from stream profile images. Let&rsquo;s get started!!
+Initial triage for &lsquo;FinalMalware.exe&rsquo;
+File identification
+
+Again DIE and PortexAnalyzer outputs indicates that it&rsquo;s a PE 32bit .NET managed assembly file, we&rsquo;ll use dnSpy for further examination" />
   <meta name="author" content="TheAbsnt" />
   
 
@@ -126,15 +130,12 @@ Initial triage for &lsquo;FinalMalware.exe&rsquo; File identification Again DIE 
   />
 
   
-  <meta name="generator" content="Hugo 0.133.1">
+  <meta name="generator" content="Hugo 0.135.0">
 
   
   
   
   
-  
-
-
   
   
   <meta itemprop="name" content="SteamHide Malware Analysis - II">
@@ -383,26 +384,26 @@ Again <code>DIE</code> and <code>PortexAnalyzer</code> outputs indicates that it
 </ul>
 <h1 id="iocs">IOCs</h1>
 <table>
-<thead>
-<tr>
-<th style="text-align:left">FinalMalware.exe</th>
-<th style="text-align:left"><code>b41868a6a32a7e1167f4e76e2f3cf565b6c0875924f9d809d889eae9cb56a6ae</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">AutoRun StartUp Registry Key</td>
-<td style="text-align:left"><code>BroMal</code> reg key with value being <code>path to malware itself</code></td>
-</tr>
-<tr>
-<td style="text-align:left">File dropped to check first run</td>
-<td style="text-align:left"><code>%LOCALAPPDATA%\uNoFGmsEX\uNoFGmsEX..txt</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>inf</code> file dropped for <code>cmstp.exe</code></td>
-<td style="text-align:left"><code>C:\Windows\Temp\[randomFileName].inf</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">FinalMalware.exe</th>
+          <th style="text-align: left"><code>b41868a6a32a7e1167f4e76e2f3cf565b6c0875924f9d809d889eae9cb56a6ae</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">AutoRun StartUp Registry Key</td>
+          <td style="text-align: left"><code>BroMal</code> reg key with value being <code>path to malware itself</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">File dropped to check first run</td>
+          <td style="text-align: left"><code>%LOCALAPPDATA%\uNoFGmsEX\uNoFGmsEX..txt</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>inf</code> file dropped for <code>cmstp.exe</code></td>
+          <td style="text-align: left"><code>C:\Windows\Temp\[randomFileName].inf</code></td>
+      </tr>
+  </tbody>
 </table>
 <p>I had fun analyzing this sample and learned a lot in the meantime.
 Here&rsquo;s the first hand report by Karsten Hahn <a href="https://www.gdatasoftware.com/blog/2021/06/36861-malware-hides-in-steam-profile-images">Picture this: Malware Hides in Steam Profile Images</a></p>
@@ -442,6 +443,10 @@ Here&rsquo;s the first hand report by Karsten Hahn <a href="https://www.gdatasof
   <nav
     class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
   >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/z2a_chall/ch01_gozi_string_decryption/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Challenge #1: Gozi String Decryption</span></a
+    >
     
     
     <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/steamhide/part01/"

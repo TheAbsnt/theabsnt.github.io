@@ -64,8 +64,10 @@
   
   
   
-  <meta name="description" content="What&rsquo;s this blog This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.
+  <meta name="description" content="What&rsquo;s this blog
+This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.
 Also, this malware was an assignment for us to analysis from the course Windows Malware Analysis for Hedgehogs, huge shoutout to Karsten Hahn for this brilliant course.
+
 So, let&rsquo;s start with initial triage the most important step when analyzing a new sample" />
   <meta name="author" content="TheAbsnt" />
   
@@ -127,15 +129,12 @@ So, let&rsquo;s start with initial triage the most important step when analyzing
   />
 
   
-  <meta name="generator" content="Hugo 0.133.1">
+  <meta name="generator" content="Hugo 0.135.0">
 
   
   
   
   
-  
-
-
   
   
   <meta itemprop="name" content="SteamHide Malware Analysis - I">
@@ -374,26 +373,26 @@ In the end it will execute <code>steam.exe</code> by starting a new process usin
 <hr>
 <h1 id="iocs--how-to-tell-if-a-system-is-compromised">IOCs : how to tell if a system is compromised</h1>
 <table>
-<thead>
-<tr>
-<th style="text-align:left"><code>Hide binary inside image.exe</code></th>
-<th style="text-align:left"><code>148914b6c64c51130a42159e4100e6eb670852901418d88c1c0383bf0cd1e339</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>blink.jpg</code> : downloaded image provided with assignment</td>
-<td style="text-align:left"><code>c0b7af1dd476effd0697ffac71c1124d3f086d88945c57cc45096d712e6386cb</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>FinalMalware.exe</code>(steam.exe) : decrypted from ICC profile</td>
-<td style="text-align:left"><code>b41868a6a32a7e1167f4e76e2f3cf565b6c0875924f9d809d889eae9cb56a6ae</code></td>
-</tr>
-<tr>
-<td style="text-align:left">connection made to the steam profile image link</td>
-<td style="text-align:left"><code>hxxps://steamcommunity[dot]com/id/advance40/images</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left"><code>Hide binary inside image.exe</code></th>
+          <th style="text-align: left"><code>148914b6c64c51130a42159e4100e6eb670852901418d88c1c0383bf0cd1e339</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>blink.jpg</code> : downloaded image provided with assignment</td>
+          <td style="text-align: left"><code>c0b7af1dd476effd0697ffac71c1124d3f086d88945c57cc45096d712e6386cb</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>FinalMalware.exe</code>(steam.exe) : decrypted from ICC profile</td>
+          <td style="text-align: left"><code>b41868a6a32a7e1167f4e76e2f3cf565b6c0875924f9d809d889eae9cb56a6ae</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">connection made to the steam profile image link</td>
+          <td style="text-align: left"><code>hxxps://steamcommunity[dot]com/id/advance40/images</code></td>
+      </tr>
+  </tbody>
 </table>
 <p>This concludes the first part of analyzing SteamHide in the very next post we will go through the second stage and explore the functionalities.</p>
 <p>See you there :)</p>
