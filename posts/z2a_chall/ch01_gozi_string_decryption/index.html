@@ -64,11 +64,11 @@
   
   
   
-  <meta name="description" content="CH01: Gozi malware - String Decryption and Injection
-what&rsquo;s the agenda
+  <meta name="description" content="what&rsquo;s the agenda
 Welcome back :)
 Today we&rsquo;ll go through a challenge from Zero2Automated: Advanced Malware Analysis which ask us to reverse engineer the string decryption routine and write an automation script for it.
-The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed." />
+The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed.
+It&rsquo;s a PE32 DLL file with SHA256 hash of 0a66e8376fc6d9283e500c6e774dc0a109656fd457a0ce7dbf40419bc8d50936. Strings output consist mostly of random strings, with some noticeable strings here n there like a PDB file path d:\in\the\town\where\ahung.pdb and a file name myfile.exe in version info." />
   <meta name="author" content="TheAbsnt" />
   
 
@@ -138,20 +138,22 @@ The sample provided is a Gozi/ISFB malware which is couple of years old and is p
   
   
   <meta itemprop="name" content="Challenge #1: Gozi String Decryption">
-  <meta itemprop="description" content="CH01: Gozi malware - String Decryption and Injection what’s the agenda Welcome back :)
+  <meta itemprop="description" content="what’s the agenda Welcome back :)
 Today we’ll go through a challenge from Zero2Automated: Advanced Malware Analysis which ask us to reverse engineer the string decryption routine and write an automation script for it.
-The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed.">
+The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed.
+It’s a PE32 DLL file with SHA256 hash of 0a66e8376fc6d9283e500c6e774dc0a109656fd457a0ce7dbf40419bc8d50936. Strings output consist mostly of random strings, with some noticeable strings here n there like a PDB file path d:\in\the\town\where\ahung.pdb and a file name myfile.exe in version info.">
   <meta itemprop="datePublished" content="2024-10-03T00:40:09+05:30">
   <meta itemprop="dateModified" content="2024-10-03T00:40:09+05:30">
-  <meta itemprop="wordCount" content="862">
+  <meta itemprop="wordCount" content="854">
   <meta itemprop="keywords" content="Reverse Engineering,Malware Analysis,Zero2auto,Gozi Malware">
   
   <meta property="og:url" content="https://theabsnt.github.io/posts/z2a_chall/ch01_gozi_string_decryption/">
   <meta property="og:site_name" content="TheAbsnt">
   <meta property="og:title" content="Challenge #1: Gozi String Decryption">
-  <meta property="og:description" content="CH01: Gozi malware - String Decryption and Injection what’s the agenda Welcome back :)
+  <meta property="og:description" content="what’s the agenda Welcome back :)
 Today we’ll go through a challenge from Zero2Automated: Advanced Malware Analysis which ask us to reverse engineer the string decryption routine and write an automation script for it.
-The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed.">
+The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed.
+It’s a PE32 DLL file with SHA256 hash of 0a66e8376fc6d9283e500c6e774dc0a109656fd457a0ce7dbf40419bc8d50936. Strings output consist mostly of random strings, with some noticeable strings here n there like a PDB file path d:\in\the\town\where\ahung.pdb and a file name myfile.exe in version info.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -166,9 +168,10 @@ The sample provided is a Gozi/ISFB malware which is couple of years old and is p
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Challenge #1: Gozi String Decryption">
-  <meta name="twitter:description" content="CH01: Gozi malware - String Decryption and Injection what’s the agenda Welcome back :)
+  <meta name="twitter:description" content="what’s the agenda Welcome back :)
 Today we’ll go through a challenge from Zero2Automated: Advanced Malware Analysis which ask us to reverse engineer the string decryption routine and write an automation script for it.
-The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed.">
+The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of 7.5 says many random bytes are present which supports file being packed.
+It’s a PE32 DLL file with SHA256 hash of 0a66e8376fc6d9283e500c6e774dc0a109656fd457a0ce7dbf40419bc8d50936. Strings output consist mostly of random strings, with some noticeable strings here n there like a PDB file path d:\in\the\town\where\ahung.pdb and a file name myfile.exe in version info.">
 
   
   
@@ -321,8 +324,7 @@ The sample provided is a Gozi/ISFB malware which is couple of years old and is p
     
   </header>
 
-  <section><h1 id="ch01-gozi-malware---string-decryption-and-injection">CH01: Gozi malware - String Decryption and Injection</h1>
-<h1 id="whats-the-agenda">what&rsquo;s the agenda</h1>
+  <section><h1 id="whats-the-agenda">what&rsquo;s the agenda</h1>
 <p>Welcome back :)</p>
 <p>Today we&rsquo;ll go through a challenge from <a href="https://www.0ffset.net/training/zero2auto/">Zero2Automated: Advanced Malware Analysis</a> which ask us to reverse engineer the string decryption routine and write an automation script for it.</p>
 <p>The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of <code>7.5</code> says many random bytes are present which supports file being packed.</p>
