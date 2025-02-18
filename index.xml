@@ -6,8 +6,15 @@
     <description>Recent content on TheAbsnt</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Oct 2024 00:40:09 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 18 Feb 2025 17:32:36 +0530</lastBuildDate>
     <atom:link href="https://theabsnt.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Analysis of ChineseAPT: RedDelta&#39;s Recent Infection Chain</title>
+      <link>https://theabsnt.github.io/posts/reddelta-plugx/reddelta-malware-campaign-aug-2024/</link>
+      <pubDate>Tue, 18 Feb 2025 17:32:36 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/reddelta-plugx/reddelta-malware-campaign-aug-2024/</guid>
+      <description>&lt;h1 id=&#34;the-introduction&#34;&gt;The introduction&lt;/h1&gt;&#xA;&lt;p&gt;In this blog, we&amp;rsquo;ll explore a recent infection chain of malware campaign carried out by Chinese State Sponsored threat actor RedDelta to deliver customized PlugX malware.&lt;/p&gt;&#xA;&lt;p&gt;The infection chain we gonna cover was observed in later half of 2024, which consist of MSC(Microsoft Management Console Snap-In Control) file as the first-stage component. Upon execution, the MSC file was configured to execute VBScript that download and installs a remotely hosted Windows Installer (MSI) file, this MSI file then drops a legitimate executable vulnerable to DLL search order hijacking, a malicious loader DLL written in NIM programming language, and a DAT file containg encrypted PlugX payload and displays a decoy document.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Challenge #1: Gozi String Decryption</title>
       <link>https://theabsnt.github.io/posts/z2a_chall/ch01_gozi_string_decryption/</link>
@@ -55,7 +62,7 @@
       <link>https://theabsnt.github.io/posts/z2ach03/part01/</link>
       <pubDate>Mon, 14 Aug 2023 15:25:42 +0530</pubDate>
       <guid>https://theabsnt.github.io/posts/z2ach03/part01/</guid>
-      <description>&lt;p&gt;What&amp;rsquo;s up dudes!! This post is a walktrough of challenge binary from &lt;em&gt;Chapter 03: Practical Analysis&lt;/em&gt; from &lt;a href=&#34;https://www.0ffset.net/training/zero2auto/&#34;&gt;Zero2Automated: Advanced Malware Analysis&lt;/a&gt; course. This challenge is set to make you comfortable with malware reversing and triage by covering variety of topics like &lt;em&gt;API hashing&lt;/em&gt;, &lt;em&gt;Anti-Debugging&lt;/em&gt;, &lt;em&gt;PEB manipulation&lt;/em&gt;, &lt;em&gt;Process Injection&lt;/em&gt;, &lt;em&gt;Thread Context Hijacking&lt;/em&gt;, &lt;em&gt;Unpacking Methods&lt;/em&gt;, &lt;em&gt;Cryptography Algorithms&lt;/em&gt; and so on.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;base-payload-main_binexe--stage01&#34;&gt;Base payload &lt;em&gt;main_bin.exe&lt;/em&gt; : Stage01&lt;/h1&gt;&#xA;&lt;p&gt;In this Part-I of this series we&amp;rsquo;ll walkthrough the base binary(stage01) ie. &lt;code&gt;main_bin.exe&lt;/code&gt;. So, let&amp;rsquo;s get started&amp;hellip;&lt;/p&gt;</description>
+      <description>&lt;p&gt;What&amp;rsquo;s up dudes!! This post is a walktrough of challenge binary from &lt;em&gt;Chapter 03: Practical Analysis&lt;/em&gt; from &lt;a href=&#34;https://www.0ffset.net/training/zero2auto/&#34;&gt;Zero2Automated: Advanced Malware Analysis&lt;/a&gt; course. This challenge is set to make you comfortable with malware reversing and triage by covering variety of topics like &lt;em&gt;API hashing&lt;/em&gt;, &lt;em&gt;Anti-Debugging&lt;/em&gt;, &lt;em&gt;PEB manipulation&lt;/em&gt;, &lt;em&gt;Process Injection&lt;/em&gt;, &lt;em&gt;Thread Context Hijacking&lt;/em&gt;, &lt;em&gt;Unpacking Methods&lt;/em&gt;, &lt;em&gt;Cryptography Algorithms&lt;/em&gt; and so on.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;base-payload-main_--stage01&#34;&gt;Base payload &lt;em&gt;main_bin.exe&lt;/em&gt; : Stage01&lt;/h1&gt;&#xA;&lt;p&gt;In this Part-I of this series we&amp;rsquo;ll walkthrough the base binary(stage01) ie. &lt;code&gt;main_bin.exe&lt;/code&gt;. So, let&amp;rsquo;s get started&amp;hellip;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
