@@ -1,0 +1,519 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en-us"
+  dir="ltr"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Challenge #2: IcedID Configuration Extraction - TheAbsnt</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="the agenda
+Welcome back!.. and i hope you&rsquo;re having a nice time :)
+This is quick write-up that will go through the process of unpacking the initial IcedID malware loader and extract, decrypt and display the configuration from the unpacked stage malware,
+
+this is the second challenge from the course Zero2Automated as part of their bi-weekly challenges
+
+the file triage
+The sample we&rsquo;re provided with is a PE64 DLL file with SHA256 hash 0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7." />
+  <meta name="author" content="THEABSNT" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://theabsnt.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/theme.svg" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8OXx8fGVufDB8fHx8fA%3D%3D" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/github.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://theabsnt.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.145.0">
+
+  
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="Challenge #2: IcedID Configuration Extraction">
+  <meta itemprop="description" content="the agenda Welcome back!.. and i hope you’re having a nice time :)
+This is quick write-up that will go through the process of unpacking the initial IcedID malware loader and extract, decrypt and display the configuration from the unpacked stage malware,
+this is the second challenge from the course Zero2Automated as part of their bi-weekly challenges
+the file triage The sample we’re provided with is a PE64 DLL file with SHA256 hash 0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7.">
+  <meta itemprop="datePublished" content="2025-03-24T00:10:14+05:30">
+  <meta itemprop="dateModified" content="2025-03-24T00:10:14+05:30">
+  <meta itemprop="wordCount" content="491">
+  <meta itemprop="keywords" content="Reverse Engineering,Malware Analysis,Zero2auto,Icedid Malware">
+  
+  <meta property="og:url" content="https://theabsnt.github.io/posts/z2a_chall/ch02-iced-config-extraction/">
+  <meta property="og:site_name" content="TheAbsnt">
+  <meta property="og:title" content="Challenge #2: IcedID Configuration Extraction">
+  <meta property="og:description" content="the agenda Welcome back!.. and i hope you’re having a nice time :)
+This is quick write-up that will go through the process of unpacking the initial IcedID malware loader and extract, decrypt and display the configuration from the unpacked stage malware,
+this is the second challenge from the course Zero2Automated as part of their bi-weekly challenges
+the file triage The sample we’re provided with is a PE64 DLL file with SHA256 hash 0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-24T00:10:14+05:30">
+    <meta property="article:modified_time" content="2025-03-24T00:10:14+05:30">
+    <meta property="article:tag" content="Reverse Engineering">
+    <meta property="article:tag" content="Malware Analysis">
+    <meta property="article:tag" content="Zero2auto">
+    <meta property="article:tag" content="Icedid Malware">
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Challenge #2: IcedID Configuration Extraction">
+  <meta name="twitter:description" content="the agenda Welcome back!.. and i hope you’re having a nice time :)
+This is quick write-up that will go through the process of unpacking the initial IcedID malware loader and extract, decrypt and display the configuration from the unpacked stage malware,
+this is the second challenge from the course Zero2Automated as part of their bi-weekly challenges
+the file triage The sample we’re provided with is a PE64 DLL file with SHA256 hash 0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7.">
+
+  
+  
+
+  
+  <link rel="canonical" href="https://theabsnt.github.io/posts/z2a_chall/ch02-iced-config-extraction/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="https://theabsnt.github.io/"
+      >TheAbsnt</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/TheAbsnt"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/TheAbsnt"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/sunil-shah-44b080328"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="https://theabsnt.github.io/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Challenge #2: IcedID Configuration Extraction</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Mar 24, 2025</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>THEABSNT</span>
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="the-agenda">the agenda</h1>
+<p>Welcome back!.. and i hope you&rsquo;re having a nice time :)</p>
+<p>This is quick write-up that will go through the process of unpacking the initial IcedID malware loader and extract, decrypt and display the configuration from the unpacked stage malware,</p>
+<blockquote>
+<p>this is the second challenge from the course <a href="https://www.0ffset.net/training/zero2auto/">Zero2Automated</a> as part of their bi-weekly challenges</p></blockquote>
+<hr>
+<h1 id="the-file-triage">the file triage</h1>
+<p>The sample we&rsquo;re provided with is a <code>PE64 DLL</code> file with <code>SHA256</code> hash <code>0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7</code>.</p>
+<p>With some initial triage, it seems packed, as</p>
+<ul>
+<li>it has almost nothing to import,</li>
+<li>and exports <code>DLLRegisterServer</code> with six another function <code>HdQZgnE</code>, <code>IfkPmdu</code>, <code>cJPSzqHBMN</code>, <code>pcufUY</code>, <code>rHqnYSA</code>, <code>zlmkoZLQMd</code></li>
+<li>strings output is flooded with random bytes hinting packed state and interestingly literal hex values</li>
+<li>also you may notice that being a dll it has no entry point set</li>
+</ul>
+<p><em><strong>assumption</strong></em>: now that there happens to be no entry point set then the dll may be executed by it&rsquo;s exported function, and we&rsquo;ll do the same using the windows system utility <code>run32dll.exe</code></p>
+<blockquote>
+<p><code>Usage: run32dll [dll_name], [export_name or #ordinal_number]</code></p></blockquote>
+<p>then run within a debugger and make sure to enable <code>Events-&gt;break on-&gt;User DLL load</code> from <code>Options-&gt;Preferences</code> of <code>x64dbg</code></p>
+<h1 id="how-to-unpack-though">how to unpack though</h1>
+<h2 id="stage-01-the-loader">stage-01: the loader</h2>
+<p>starts off by calling <code>sub_180005A13</code> a bunch of time to dynamically resolve the needed functions via <code>PEB</code>, then continue if current year is <strong><code>2022</code></strong> or terminate the process otherwise.</p>
+<p>Within <code>x64dbg</code> run until <code>VirtualAlloc</code> followed by <code>VirtualProtect</code> is hit and checking the memory region reveals another <code>MZ</code> header ie. a executable file, dump that to disk (using <code>OllyDumpEx</code> in <code>X64dbg</code>)
+<img src="/mat-ch02-iced/xdbg-snap.png" alt="xdbg-snap.png">
+once the PE is dumped successfully, we can move on with config extraction.</p>
+<h1 id="hunting-the-config">hunting the config</h1>
+<h2 id="stage-02-the-dumped-pe">stage-02: the dumped PE</h2>
+<p><img src="/mat-ch02-iced/fn-dllEntryPoint-stage02.png" alt="fn-dllEntryPoint-stage02"></p>
+<p>This DLL starts off by immediately making a call to <code>CreateThread</code> where <code>lpStartAddress</code> points to <code>StartAddress</code> ie.<code>sub_180002AA4</code> and is executed, which calls another subroutine <code>sub_180002174</code></p>
+<p><img src="/mat-ch02-iced/fn-sub_180002174-stage02.png" alt="fn-sub_180002174-stage02"></p>
+<p>this subroutine at first creates a number from CPU tick counts, then calls another subroutine <code>sub_180002428</code> that will decrypt the <code>.d</code> section by XORing first <code>0x20</code> bytes against bytes <code>0x40</code> ahead resp. (see the <a href="#config-extraction-script">config extraction script</a>  for more),
+<img src="/mat-ch02-iced/section-d-stage02.png" alt="section-d-stage02"></p>
+<p><img src="/mat-ch02-iced/fn-sub_180002428-stage02.png" alt="fn-sub_180002428-stage02">
+once decrypted we see a config url <code>ilekvoyn[.]com</code></p>
+<pre tabindex="0"><code>C:\Users\theabsnt\Desktop&gt;python extract-config.py stage-2-iced-id.dll.vir
+Decrypted .b sections:
+b&#39;\xd9o\x8d\x06ilekvoyn.com\x00\xafO\xc2y\xd2N\xb6!\xfd\xbd@}u\xd4\x17&#39;
+
+Campaign URL: ilekvoyn.com
+</code></pre><p>after decryption it moves on to gather various system related information by calling <code>sub_180002860</code>
+<img src="/mat-ch02-iced/fn-sub_180002860-stage02.png" alt="fn-sub_180002860-stage02">
+which forms a string with various system info, that will eventually be sent back to C2 url after establishing the connection down the line.</p>
+<p>That&rsquo;s it for now, hope you got some value off of it!
+I&rsquo;ll see you around :)</p>
+<hr>
+<h1 id="config-extraction-script">config extraction script</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># filename : extract-config.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># author : theabsnt :)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># usage:  extract-config.py [unmapped_or_dumped_stage-02_icedid]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pefile
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys<span style="color:#f92672">,</span> struct
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_config</span>(config_data):
+</span></span><span style="display:flex;"><span>    decrypted_blob <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0x20</span>):
+</span></span><span style="display:flex;"><span>        decrypted_blob <span style="color:#f92672">+=</span> bytes([config_data[i] <span style="color:#f92672">^</span> config_data[i<span style="color:#f92672">+</span><span style="color:#ae81ff">0x40</span>]])
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> decrypted_blob
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract_config</span>(decrypted_config):
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> decrypted_config[<span style="color:#ae81ff">4</span>:]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>decode()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> url
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    pe <span style="color:#f92672">=</span> pefile<span style="color:#f92672">.</span>PE(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    config_data <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> section <span style="color:#f92672">in</span> pe<span style="color:#f92672">.</span>sections:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;.d</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">in</span> section<span style="color:#f92672">.</span>Name:
+</span></span><span style="display:flex;"><span>            config_data <span style="color:#f92672">=</span> section<span style="color:#f92672">.</span>get_data()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> config_data <span style="color:#f92672">!=</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>        decrypted_blob <span style="color:#f92672">=</span> decrypt_config(config_data)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Decrypted .b sections:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>decrypted_blob<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Campaign URL: </span><span style="color:#e6db74">{</span>extract_config(decrypted_blob)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/reverse-engineering"
+      >reverse engineering</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/malware-analysis"
+      >malware analysis</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/zero2auto"
+      >zero2auto</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/icedid-malware"
+      >icedid malware</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/reddelta-plugx/reddelta-malware-campaign-aug-2024/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Analysis of ChineseAPT: RedDelta&#39;s Recent Infection Chain</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/z2a_chall/ch01_gozi_string_decryption/"
+      ><span>Challenge #1: Gozi String Decryption</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2025
+    <a class="link" href="https://theabsnt.github.io/">TheAbsnt</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

@@ -40,6 +40,8 @@
 
 
 
+
+
 <html
   class="not-ready lg:text-base"
   style="--bg: #fbfbfb"
@@ -69,7 +71,7 @@ Stage02: Extracted from resource section of main_bin.exe
 Welcome back, in this part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look at the second payload extracted from .rsrc section and injected into another process of stage01 (main_bin.exe). So, let&rsquo;s get started from the main of this stage..
 Inside &lsquo;main()&rsquo;
 " />
-  <meta name="author" content="TheAbsnt" />
+  <meta name="author" content="THEABSNT" />
   
 
   
@@ -101,6 +103,8 @@ Inside &lsquo;main()&rsquo;
   
   <link rel="preload" as="image" href="https://theabsnt.github.io/github.svg" />
   
+  <link rel="preload" as="image" href="https://theabsnt.github.io/linkedin.svg" />
+  
   <link rel="preload" as="image" href="https://theabsnt.github.io/rss.svg" />
   
   
@@ -129,7 +133,7 @@ Inside &lsquo;main()&rsquo;
   />
 
   
-  <meta name="generator" content="Hugo 0.144.0">
+  <meta name="generator" content="Hugo 0.145.0">
 
   
   
@@ -278,6 +282,16 @@ Inside &lsquo;main()&rsquo;
       
       <a
         class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/sunil-shah-44b080328"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
         style="--url: url(./rss.svg)"
         href="https://theabsnt.github.io/index.xml"
         target="_blank"
@@ -308,6 +322,9 @@ Inside &lsquo;main()&rsquo;
       
       
       
+      
+      <span class="mx-1">&middot;</span>
+      <span>THEABSNT</span>
       
     </div>
     
