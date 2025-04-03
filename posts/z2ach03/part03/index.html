@@ -1,0 +1,428 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en-us"
+  dir="ltr"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-III) - TheAbsnt</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Welcome back.. and i hope you all are having a nice time :).
+In this last part of analysing challenge binary from Z2A: Ch03 (Practical Analysis). We gonna take look at mighty capabilities this binary hiding within it. So, let&rsquo;s get started&hellip;
+Inside &lsquo;main()&rsquo;
+
+All this stage does is display a message box and exit
+
+
+Conclusion
+gotcha guys, i was making the hype about satge03 capabilties,
+jokes apart this binary just shows a message box and exit. Hope you had fun reading this walkthrough and i&rsquo;ll see you in another post." />
+  <meta name="author" content="THEABSNT" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://theabsnt.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/theme.svg" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8OXx8fGVufDB8fHx8fA%3D%3D" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/github.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://theabsnt.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.145.0">
+
+  
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)">
+  <meta itemprop="description" content="Analysing Stage03 of CH03 Challenge binary">
+  <meta itemprop="datePublished" content="2023-08-17T09:35:05+05:30">
+  <meta itemprop="dateModified" content="2023-08-17T09:35:05+05:30">
+  <meta itemprop="wordCount" content="98">
+  <meta itemprop="keywords" content="Reverse Engineering,Zero2auto">
+  
+  <meta property="og:url" content="https://theabsnt.github.io/posts/z2ach03/part03/">
+  <meta property="og:site_name" content="TheAbsnt">
+  <meta property="og:title" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)">
+  <meta property="og:description" content="Analysing Stage03 of CH03 Challenge binary">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-08-17T09:35:05+05:30">
+    <meta property="article:modified_time" content="2023-08-17T09:35:05+05:30">
+    <meta property="article:tag" content="Reverse Engineering">
+    <meta property="article:tag" content="Zero2auto">
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)">
+  <meta name="twitter:description" content="Analysing Stage03 of CH03 Challenge binary">
+
+  
+  
+
+  
+  <link rel="canonical" href="https://theabsnt.github.io/posts/z2ach03/part03/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="https://theabsnt.github.io/"
+      >TheAbsnt</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/TheAbsnt"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/TheAbsnt"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/sunil-shah-44b080328"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="https://theabsnt.github.io/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Aug 17, 2023</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>THEABSNT</span>
+      
+    </div>
+    
+  </header>
+
+  <section><p>Welcome back.. and i hope you all are having a nice time :).</p>
+<p>In this last part of analysing challenge binary from Z2A: Ch03 (Practical Analysis). We gonna take look at mighty capabilities this binary hiding within it. So, let&rsquo;s get started&hellip;</p>
+<h1 id="inside-main">Inside &lsquo;main()&rsquo;</h1>
+<p><img src="/mat_z2ach03/Pseudocode_sub_401000_stage03.png" alt="ida decompiled main()"></p>
+<p>All this stage does is display a message box and exit</p>
+<p><img src="/mat_z2ach03/MessageBox_prompted_by_stage03.png" alt="message_prompted_stage03"></p>
+<hr>
+<h1 id="conclusion">Conclusion</h1>
+<p>gotcha guys, i was making the hype about satge03 capabilties,
+jokes apart this binary just shows a message box and exit. Hope you had fun reading this walkthrough and i&rsquo;ll see you in another post.</p>
+<p>Till then have a nice time :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/reverse-engineering"
+      >reverse engineering</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/zero2auto"
+      >zero2auto</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/steamhide/part01/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>SteamHide Malware Analysis - I</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/z2ach03/part02/"
+      ><span>Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2025
+    <a class="link" href="https://theabsnt.github.io/">TheAbsnt</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

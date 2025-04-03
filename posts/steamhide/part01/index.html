@@ -1,0 +1,500 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en-us"
+  dir="ltr"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>SteamHide Malware Analysis - I - TheAbsnt</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="What&rsquo;s this blog
+This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.
+Also, this malware was an assignment for us to analysis from the course Windows Malware Analysis for Hedgehogs, huge shoutout to Karsten Hahn for this brilliant course.
+
+So, let&rsquo;s start with initial triage the most important step when analyzing a new sample" />
+  <meta name="author" content="THEABSNT" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://theabsnt.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/theme.svg" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8OXx8fGVufDB8fHx8fA%3D%3D" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/github.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/linkedin.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://theabsnt.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.145.0">
+
+  
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="SteamHide Malware Analysis - I">
+  <meta itemprop="description" content="What’s this blog This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.
+Also, this malware was an assignment for us to analysis from the course Windows Malware Analysis for Hedgehogs, huge shoutout to Karsten Hahn for this brilliant course.
+So, let’s start with initial triage the most important step when analyzing a new sample">
+  <meta itemprop="datePublished" content="2024-08-30T11:51:36+05:30">
+  <meta itemprop="dateModified" content="2024-08-30T11:51:36+05:30">
+  <meta itemprop="wordCount" content="739">
+  <meta itemprop="keywords" content="Reverse Engineering,Malware Analysis,Steamhide">
+  
+  <meta property="og:url" content="https://theabsnt.github.io/posts/steamhide/part01/">
+  <meta property="og:site_name" content="TheAbsnt">
+  <meta property="og:title" content="SteamHide Malware Analysis - I">
+  <meta property="og:description" content="What’s this blog This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.
+Also, this malware was an assignment for us to analysis from the course Windows Malware Analysis for Hedgehogs, huge shoutout to Karsten Hahn for this brilliant course.
+So, let’s start with initial triage the most important step when analyzing a new sample">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-30T11:51:36+05:30">
+    <meta property="article:modified_time" content="2024-08-30T11:51:36+05:30">
+    <meta property="article:tag" content="Reverse Engineering">
+    <meta property="article:tag" content="Malware Analysis">
+    <meta property="article:tag" content="Steamhide">
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SteamHide Malware Analysis - I">
+  <meta name="twitter:description" content="What’s this blog This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.
+Also, this malware was an assignment for us to analysis from the course Windows Malware Analysis for Hedgehogs, huge shoutout to Karsten Hahn for this brilliant course.
+So, let’s start with initial triage the most important step when analyzing a new sample">
+
+  
+  
+
+  
+  <link rel="canonical" href="https://theabsnt.github.io/posts/steamhide/part01/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="https://theabsnt.github.io/"
+      >TheAbsnt</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/TheAbsnt"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/TheAbsnt"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/sunil-shah-44b080328"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="https://theabsnt.github.io/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">SteamHide Malware Analysis - I</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Aug 30, 2024</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>THEABSNT</span>
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="whats-this-blog">What&rsquo;s this blog</h1>
+<p>This post explores an interesting malware <code>SteamHide</code> which abuses <code>Steam</code> servers to host malware within steam profile images to serve payloads for malware downloaders. Threat Actors can update already infected machines just by adding new images to steam profile.</p>
+<p>Also, this malware was an assignment for us to analysis from the course <a href="https://www.udemy.com/course/windows-malware-analysis-for-hedgehogs-beginner-training/">Windows Malware Analysis for Hedgehogs</a>, huge shoutout to Karsten Hahn for this brilliant course.</p>
+<hr>
+<p>So, let&rsquo;s start with initial triage the most important step when analyzing a new sample</p>
+<h1 id="initial-triage-for-hide-binary-inside-imageexe">Initial triage for &lsquo;Hide binary inside image.exe&rsquo;</h1>
+<h2 id="file-identification">File identification</h2>
+<p><img src="/mat_steamhide/stage01/meta_file_Identification_stage01.png" alt="metadata_fileIdentification">
+The <code>DIE</code>  output shows it&rsquo;s a <code>PE 32bit</code> .NET Executable, which can be assured with the presence of <code>CLR runtime header</code> in data directory of this sample. We can use <code>dnSpy</code> to further analyse the functionality of this sample.</p>
+<h2 id="strings-to-attach">Strings to attach</h2>
+<p><img src="/mat_steamhide/stage01/meta_strings_output_stage01.png" alt="metadata_strings_output"></p>
+<p>Taking a look at strings output reveals eye catching strings like</p>
+<ul>
+<li>user agents and urls indicates possible internet commnuication</li>
+<li>a gibberish but interesting looking string</li>
+<li>an executable file name <code>steam.exe</code></li>
+<li>and many cryptography related strings and functions, where <code>TripleDES</code> stands out indicating possible algorithm used here</li>
+</ul>
+<h1 id="the-way-it-behaves">The way it behaves</h1>
+<h2 id="starts-with-form_load">Starts with &lsquo;Form_Load()&rsquo;</h2>
+<p><img src="/mat_steamhide/stage01/mw_fn_Form1_Load_stage01.png" alt="mw_mw_fn_Form1_Load"></p>
+<ol>
+<li>initializing a variable <code>String text</code> having a string containing an html image tag including a regex URL in <code>src</code> attribute</li>
+<li>moving on we see a <code>WebClient.DownloadString</code> method which downloads the mentioned URL&rsquo;s source code as String to store in variable <code>String text2</code></li>
+<li><code>Regex.Match(String input, String pattern)</code> method used to search for a pattern(<code>text</code>) in specified input string(the source code in <code>text2</code>),  on success it will extract and store the matched string in<code>String value</code> using <code>Groups[1].Value</code> which reveals an image url</li>
+<li>next <code>WebClient.DownloadData(String)</code> method used to download the image resource from URL stored in <code>value</code> and save as a byte array in variable <code>byte[] array</code>, then convert it to a image class object using <code>Image.fromStream(Stream)</code> method (after converting the byte array <code>array</code>  to a memory stream), in the very next line,<code>Image.GetPropertyItem(Int32)</code> is used which returns the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem?view=net-8.0">PropertyItem Class</a>  for specified ID value <code>34675(0x8773)</code>, a quick look at MSDN page <a href="https://learn.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id?view=net-8.0">PropertyItem.Id Property</a> shows that ID <code>0x8773</code> refers to <code>PropertyTagICCProfile</code> property tag ie. ICC profile embedded in the image.</li>
+</ol>
+<blockquote>
+<p><strong>TIP#1</strong>: You can view ICC profile of an image using exif data parser like <a href="https://github.com/exiftool/exiftool">exiftool</a> and use command <code>exiftool.exe -icc_profile -d -w icc [yourImage]</code> to extract to a separate <code>.icc</code> file</p></blockquote>
+<ol start="5">
+<li>We see a call to <code>DecryptBytes()</code> with arguments passed are ICC profile data from <code>value2</code>, password string <code>{PjlD\bzxS#;8@\x.3JT&amp;&lt;4^MsTqE0</code>, an integer value <code>192</code> for iterations,
+<img src="/mat_steamhide/stage01/mw_fn_DecryptBytes_stage01.png" alt="mw_fn_DecryptBytes">which calls another method <code>CryptBytes()</code> with all the above three arguments plus the process set to decryption via enum <code>CryptProc.DECRYPT</code>, <em>we&rsquo;ll resume onto the cryptography stuff in a bit</em>, moving on, <code>File.WriteAllBytes(String, Byte[])</code> method used which will create a new executable file <code>steam.exe</code>, write the specified byte array <code>array2</code>(storing the decrypted second stage binary data),
+In the end it will execute <code>steam.exe</code> by starting a new process using <code>Process.Start</code>method</li>
+</ol>
+<h2 id="form1_cryptbytes-old-fashioned-cryptography-stuff">&lsquo;Form1_CryptBytes()&rsquo;: old fashioned Cryptography Stuff</h2>
+<p>As we saw earlier, there was a call to <code>CryptBytes()</code> method, let&rsquo;s take a look
+<img src="/mat_steamhide/stage01/mw_fn_CryptBytes_stage01.png" alt="mw_fn_CryptBytes"></p>
+<ul>
+<li>Creates a <code>PasswordDeriveBytes</code> object to derive key from password string, key salt to use, hash algorithm set to <code>SHA256</code>, number of iterations to perform</li>
+<li><code>TripleDES.Create</code> method used to perform <code>TripleDES</code> algorithm, then key and IV properties are set using <code>PasswordDeriveBytes.GetBytes()</code></li>
+<li>now the stream transformation (<code>ICryptoTransform cryptoTransform</code>) to perform is set using <code>?:</code>(ternary) operator based on whatever<code>cryptProc</code> is set, which gives either encryptor(<code>TriplesDES.CreateEncryptor()</code>) or decryptor(<code>TripleDES.CreateDecryptor()</code>)</li>
+<li>creates a<code>CryptoStream</code> instance <code>cryptoStream</code> with a target data stream(<code>MemoryStream memoryStream</code>), transformation to use <code>cryptoTransform</code>, and the mode of stream set to write access <code>CryptoStreamMode.Write</code>, then writes to <code>memoryStream</code> the transformed bytes from <code>plain</code></li>
+<li>in the end either encrypted or decrypted byte array(<code>memoryStream.ToArray()</code>) is returned</li>
+</ul>
+<h2 id="decryption-recipe">Decryption recipe</h2>
+<p>Here&rsquo;s the <a href="https://cyberchef.org/#recipe=Triple_DES_Decrypt(%7B'option':'Hex','string':'5AD3B743A474B24211B3809D07D6B517365F6161BF8A975B'%7D,%7B'option':'Hex','string':'5F49826133F6F7A2'%7D,'CBC','Raw','Raw')">cyberchef decryption recipe</a> to decrypt the ICC profile</p>
+<blockquote>
+<p><strong>NOTE</strong>: As of writing this post, when i ran the sample, the steam profile image source code does not return the intended image url, which is why the <code>steam.exe</code> turn out to be invalid executable. So, I&rsquo;m gonna move on with image provided with assignment beforehand just for such cases, check the hash below.</p></blockquote>
+<hr>
+<h1 id="iocs--how-to-tell-if-a-system-is-compromised">IOCs : how to tell if a system is compromised</h1>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left"><code>Hide binary inside image.exe</code></th>
+          <th style="text-align: left"><code>148914b6c64c51130a42159e4100e6eb670852901418d88c1c0383bf0cd1e339</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>blink.jpg</code> : downloaded image provided with assignment</td>
+          <td style="text-align: left"><code>c0b7af1dd476effd0697ffac71c1124d3f086d88945c57cc45096d712e6386cb</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>FinalMalware.exe</code>(steam.exe) : decrypted from ICC profile</td>
+          <td style="text-align: left"><code>b41868a6a32a7e1167f4e76e2f3cf565b6c0875924f9d809d889eae9cb56a6ae</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">connection made to the steam profile image link</td>
+          <td style="text-align: left"><code>hxxps://steamcommunity[dot]com/id/advance40/images</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>This concludes the first part of analyzing SteamHide in the very next post we will go through the second stage and explore the functionalities.</p>
+<p>See you there :)</p>
+<hr>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/reverse-engineering"
+      >reverse engineering</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/malware-analysis"
+      >malware analysis</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/steamhide"
+      >steamhide</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/steamhide/part02/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>SteamHide Malware Analysis - II</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/z2ach03/part03/"
+      ><span>Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2025
+    <a class="link" href="https://theabsnt.github.io/">TheAbsnt</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>
