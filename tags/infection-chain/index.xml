@@ -6,8 +6,15 @@
     <description>Recent content in Infection Chain on TheAbsnt</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Mar 2025 00:47:42 +0530</lastBuildDate>
+    <lastBuildDate>Mon, 25 Aug 2025 01:59:15 +0530</lastBuildDate>
     <atom:link href="https://theabsnt.github.io/tags/infection-chain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Memory-Only Mayhem: JScript to Powershell to .NET Loader to Infostealer</title>
+      <link>https://theabsnt.github.io/posts/formbook-infection-chain/</link>
+      <pubDate>Mon, 25 Aug 2025 01:59:15 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/formbook-infection-chain/</guid>
+      <description>&lt;h1 id=&#34;an-introduction&#34;&gt;An Introduction&lt;/h1&gt;&#xA;&lt;p&gt;Welcome back and I hope you guys are having a nice time :)&lt;/p&gt;&#xA;&lt;p&gt;Couple of weeks ago, while i was looking for a malware to analyze, I came across this &lt;a href=&#34;https://bazaar.abuse.ch/sample/401228957d3c13eaacfdf3154bb0c1f146b59c3615cd40848a54a211a7e14f72/&#34;&gt;sample&lt;/a&gt; on malware bazaar, that is initially a &lt;a href=&#34;https://en.wikipedia.org/wiki/JScript&#34;&gt;JScript&lt;/a&gt; file.&#xA;When started analyzing it enfolds into multi-staged infection chain incorporating from jscript file, to in memory execution of layers of powershell payloads, to stenography, to dynamically loading packed and obfuscated .NET dll, to exploiting a LOLBIN to dynamic execution of an infostealer. A key highlight of this infection chain is its heavy reliance on in-memory execution, minimizing disk footprint across stages.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Guardians Paradox: When Protector becomes Predator - Malware Version</title>
       <link>https://theabsnt.github.io/posts/guardians-paradox/</link>

@@ -2,28 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://theabsnt.github.io/posts/guardians-paradox/</loc>
-    <lastmod>2025-03-29T00:47:42+05:30</lastmod>
-  </url><url>
     <loc>https://theabsnt.github.io/tags/infection-chain/</loc>
-    <lastmod>2025-03-29T00:47:42+05:30</lastmod>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
+  </url><url>
+    <loc>https://theabsnt.github.io/tags/infostealer/</loc>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
   </url><url>
     <loc>https://theabsnt.github.io/tags/malware-analysis/</loc>
-    <lastmod>2025-03-29T00:47:42+05:30</lastmod>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
   </url><url>
     <loc>https://theabsnt.github.io/tags/malware-campaign/</loc>
-    <lastmod>2025-03-29T00:47:42+05:30</lastmod>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
+  </url><url>
+    <loc>https://theabsnt.github.io/posts/formbook-infection-chain/</loc>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
   </url><url>
     <loc>https://theabsnt.github.io/posts/</loc>
-    <lastmod>2025-03-29T00:47:42+05:30</lastmod>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
   </url><url>
     <loc>https://theabsnt.github.io/tags/reverse-engineering/</loc>
-    <lastmod>2025-03-29T00:47:42+05:30</lastmod>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
   </url><url>
     <loc>https://theabsnt.github.io/tags/</loc>
-    <lastmod>2025-03-29T00:47:42+05:30</lastmod>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
   </url><url>
     <loc>https://theabsnt.github.io/</loc>
+    <lastmod>2025-08-25T01:59:15+05:30</lastmod>
+  </url><url>
+    <loc>https://theabsnt.github.io/posts/guardians-paradox/</loc>
     <lastmod>2025-03-29T00:47:42+05:30</lastmod>
   </url><url>
     <loc>https://theabsnt.github.io/posts/z2a_chall/ch02-iced-config-extraction/</loc>
