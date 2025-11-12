@@ -364,9 +364,9 @@ It then sets up a system startup task that runs script (<code>script1.aspx</code
 <img src="/mat-evil-deno/stg3-script1.png" alt="stg3-script1"></p>
 <p>Once we get the code-object to be loaded, we can then prepend <code>PYC</code> header of <code>16byte</code> of Python3.13 to make it a <code>PYC</code> file, then using <code>Pylingual</code> we decompile the pyc file to get following python code on the right:
 <img src="/mat-evil-deno/stg3-deompil-py.png" alt="stg3-deompil-py">
-As the name of the decompiled python says <code>heap_alloc_shellcode_loader.py</code>, it loads a shellcode(a DLl file) to the current process using simple <code>CreateThread()</code> call using python <code>ctypes</code> module.</p>
+As the name of the decompiled python says <code>heap_alloc_shellcode_loader.py</code>, it loads a shellcode(a DLL file) to the current process using simple <code>CreateThread()</code> call using python <code>ctypes</code> module.</p>
 <hr>
-<h1 id="stage04-the-dll-file">stage04: the dll file</h1>
+<h1 id="stage04-the-dll-file">stage04: the DLL file</h1>
 <p>similar samples found based on <code>imphash: c3d7ddc86c9402d44b3c8487b2ead7aa</code> :
 <img src="/mat-evil-deno/stg4-imphash-pivot.png" alt="stg4-imphash-pivot">
 main driver function are same, also both uses same Mutex string : <code>Global\\OALvPABeVdMtx</code>
