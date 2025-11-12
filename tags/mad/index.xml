@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mad on TheAbsnt</title>
+    <link>https://theabsnt.github.io/tags/mad/</link>
+    <description>Recent content in Mad on TheAbsnt</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Nov 2025 16:10:18 +0530</lastBuildDate>
+    <atom:link href="https://theabsnt.github.io/tags/mad/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[MAD] Entry-01 : Evil Deno Caught In Wild</title>
+      <link>https://theabsnt.github.io/posts/mad-entry/evil-deno/</link>
+      <pubDate>Wed, 12 Nov 2025 16:10:18 +0530</pubDate>
+      <guid>https://theabsnt.github.io/posts/mad-entry/evil-deno/</guid>
+      <description>&lt;h1 id=&#34;what-is-mad&#34;&gt;What is MAD?&lt;/h1&gt;&#xA;&lt;p&gt;MAD stands for Malware Analysis Diary.&#xA;In these entries, I&amp;rsquo;ll take a look and try analyzing some interesting and challenging binaries that may include: complex infection, techniques, reverse engineering, obfuscation, and try to cover variety of samples and so on.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;context-of-this-entry&#34;&gt;Context of this Entry&lt;/h1&gt;&#xA;&lt;p&gt;The context originates from &lt;a href=&#34;https://x.com/malwrhunterteam/status/1964023478060716437&#34;&gt;MalwareHunterTeam Tweet&lt;/a&gt;. This introduces an executable named &lt;code&gt;GoogleDriverSetup.exe&lt;/code&gt;, It is compiled using Rust based JavaScript runtime called &lt;a href=&#34;https://docs.deno.com/runtime/&#34;&gt;Deno&lt;/a&gt;. Let&amp;rsquo;s get started!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

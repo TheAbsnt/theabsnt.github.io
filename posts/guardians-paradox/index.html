@@ -70,6 +70,7 @@
 Welcome back!.. hope you&rsquo;re having a nice time :)
 
 &ldquo;We often trust our security software to stand as an unbreakable wall against malware and attacks, but what happens when that very wall is weaponized against us?&rdquo;
+
 In this blog, we&rsquo;ll analyse a malware and learn along the way, which was found in a recent discovery by Trellix Advanced Research Center 12 that reveals a malware campaign that weaponizes a legitimate Avast Anti-Rootkit driver(aswArPot.sys) to bypass security measures." />
   <meta name="author" content="THEABSNT" />
   
@@ -133,7 +134,7 @@ In this blog, we&rsquo;ll analyse a malware and learn along the way, which was f
   />
 
   
-  <meta name="generator" content="Hugo 0.148.2">
+  <meta name="generator" content="Hugo 0.152.2">
 
   
   
@@ -341,11 +342,13 @@ In this blog, we’ll analyse a malware and learn along the way, which was found
   <section><h1 id="the-introduction">The introduction</h1>
 <p>Welcome back!.. hope you&rsquo;re having a nice time :)</p>
 <blockquote>
-<p>&ldquo;We often trust our security software to stand as an unbreakable wall against malware and attacks, but what happens when that very wall is weaponized against us?&rdquo;</p></blockquote>
+<p>&ldquo;We often trust our security software to stand as an unbreakable wall against malware and attacks, but what happens when that very wall is weaponized against us?&rdquo;</p>
+</blockquote>
 <p>In this blog, we&rsquo;ll analyse a malware and learn along the way, which was found in a recent discovery by Trellix Advanced Research Center <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> that reveals a malware campaign that weaponizes a legitimate Avast Anti-Rootkit driver(<code>aswArPot.sys</code>) to bypass security measures.</p>
 <p>The malware exploits or manipulates the driver&rsquo;s kernel level access to disable and terminate security processes, and take control of the infected system. This campaign is good enough example of often used BYOVD(Bring Your Own Vulnerable Driver) attack which focuses on exploiting legitimate but vulnerable drivers to gain kernel-level access to bypass the antivirus and EDR solution.</p>
 <blockquote>
-<p>&ldquo;What a good way to bypass the security vendors is to terminate them right away&rdquo;</p></blockquote>
+<p>&ldquo;What a good way to bypass the security vendors is to terminate them right away&rdquo;</p>
+</blockquote>
 <p>Such behavior is lethal and sinister as it straight up terminates
 the security vendors process. Let&rsquo;s get into the technicals of this malware.</p>
 <hr>

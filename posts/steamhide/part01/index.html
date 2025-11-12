@@ -133,7 +133,7 @@ So, let&rsquo;s start with initial triage the most important step when analyzing
   />
 
   
-  <meta name="generator" content="Hugo 0.148.2">
+  <meta name="generator" content="Hugo 0.152.2">
 
   
   
@@ -365,7 +365,8 @@ The <code>DIE</code>  output shows it&rsquo;s a <code>PE 32bit</code> .NET Execu
 <li>next <code>WebClient.DownloadData(String)</code> method used to download the image resource from URL stored in <code>value</code> and save as a byte array in variable <code>byte[] array</code>, then convert it to a image class object using <code>Image.fromStream(Stream)</code> method (after converting the byte array <code>array</code>  to a memory stream), in the very next line,<code>Image.GetPropertyItem(Int32)</code> is used which returns the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem?view=net-8.0">PropertyItem Class</a>  for specified ID value <code>34675(0x8773)</code>, a quick look at MSDN page <a href="https://learn.microsoft.com/en-us/dotnet/api/system.drawing.imaging.propertyitem.id?view=net-8.0">PropertyItem.Id Property</a> shows that ID <code>0x8773</code> refers to <code>PropertyTagICCProfile</code> property tag ie. ICC profile embedded in the image.</li>
 </ol>
 <blockquote>
-<p><strong>TIP#1</strong>: You can view ICC profile of an image using exif data parser like <a href="https://github.com/exiftool/exiftool">exiftool</a> and use command <code>exiftool.exe -icc_profile -d -w icc [yourImage]</code> to extract to a separate <code>.icc</code> file</p></blockquote>
+<p><strong>TIP#1</strong>: You can view ICC profile of an image using exif data parser like <a href="https://github.com/exiftool/exiftool">exiftool</a> and use command <code>exiftool.exe -icc_profile -d -w icc [yourImage]</code> to extract to a separate <code>.icc</code> file</p>
+</blockquote>
 <ol start="5">
 <li>We see a call to <code>DecryptBytes()</code> with arguments passed are ICC profile data from <code>value2</code>, password string <code>{PjlD\bzxS#;8@\x.3JT&amp;&lt;4^MsTqE0</code>, an integer value <code>192</code> for iterations,
 <img src="/mat_steamhide/stage01/mw_fn_DecryptBytes_stage01.png" alt="mw_fn_DecryptBytes">which calls another method <code>CryptBytes()</code> with all the above three arguments plus the process set to decryption via enum <code>CryptProc.DECRYPT</code>, <em>we&rsquo;ll resume onto the cryptography stuff in a bit</em>, moving on, <code>File.WriteAllBytes(String, Byte[])</code> method used which will create a new executable file <code>steam.exe</code>, write the specified byte array <code>array2</code>(storing the decrypted second stage binary data),
@@ -384,7 +385,8 @@ In the end it will execute <code>steam.exe</code> by starting a new process usin
 <h2 id="decryption-recipe">Decryption recipe</h2>
 <p>Here&rsquo;s the <a href="https://cyberchef.org/#recipe=Triple_DES_Decrypt(%7B'option':'Hex','string':'5AD3B743A474B24211B3809D07D6B517365F6161BF8A975B'%7D,%7B'option':'Hex','string':'5F49826133F6F7A2'%7D,'CBC','Raw','Raw')">cyberchef decryption recipe</a> to decrypt the ICC profile</p>
 <blockquote>
-<p><strong>NOTE</strong>: As of writing this post, when i ran the sample, the steam profile image source code does not return the intended image url, which is why the <code>steam.exe</code> turn out to be invalid executable. So, I&rsquo;m gonna move on with image provided with assignment beforehand just for such cases, check the hash below.</p></blockquote>
+<p><strong>NOTE</strong>: As of writing this post, when i ran the sample, the steam profile image source code does not return the intended image url, which is why the <code>steam.exe</code> turn out to be invalid executable. So, I&rsquo;m gonna move on with image provided with assignment beforehand just for such cases, check the hash below.</p>
+</blockquote>
 <hr>
 <h1 id="iocs--how-to-tell-if-a-system-is-compromised">IOCs : how to tell if a system is compromised</h1>
 <table>

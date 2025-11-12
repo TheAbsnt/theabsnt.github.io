@@ -72,6 +72,7 @@ This is a quick write-up that will go through the process of unpacking the initi
 
 this is the second challenge from the course Zero2Automated as part of their bi-weekly challenges
 
+
 the file triage
 The sample we&rsquo;re provided with is a PE64 DLL file with SHA256 hash 0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7." />
   <meta name="author" content="THEABSNT" />
@@ -136,7 +137,7 @@ The sample we&rsquo;re provided with is a PE64 DLL file with SHA256 hash 0581f0b
   />
 
   
-  <meta name="generator" content="Hugo 0.148.2">
+  <meta name="generator" content="Hugo 0.152.2">
 
   
   
@@ -348,7 +349,8 @@ the file triage The sample we’re provided with is a PE64 DLL file with SHA256 
 <p>Welcome back!.. and i hope you&rsquo;re having a nice time :)</p>
 <p>This is a quick write-up that will go through the process of unpacking the initial IcedID malware loader and extract, decrypt and display the configuration from the unpacked stage of this malware,</p>
 <blockquote>
-<p>this is the second challenge from the course <a href="https://www.0ffset.net/training/zero2auto/">Zero2Automated</a> as part of their bi-weekly challenges</p></blockquote>
+<p>this is the second challenge from the course <a href="https://www.0ffset.net/training/zero2auto/">Zero2Automated</a> as part of their bi-weekly challenges</p>
+</blockquote>
 <hr>
 <h1 id="the-file-triage">the file triage</h1>
 <p>The sample we&rsquo;re provided with is a <code>PE64 DLL</code> file with <code>SHA256</code> hash <code>0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7</code>.</p>
@@ -361,7 +363,8 @@ the file triage The sample we’re provided with is a PE64 DLL file with SHA256 
 </ul>
 <p><em><strong>assumption</strong></em>: now that there happens to be no entry point set then the dll may be executed by it&rsquo;s exported function, and we&rsquo;ll do the same using the windows system utility <code>run32dll.exe</code></p>
 <blockquote>
-<p><code>Usage: run32dll [dll_name], [export_name or #ordinal_number]</code></p></blockquote>
+<p><code>Usage: run32dll [dll_name], [export_name or #ordinal_number]</code></p>
+</blockquote>
 <p>then run within a debugger and make sure to enable <code>Events-&gt;break on-&gt;User DLL load</code> from <code>Options-&gt;Preferences</code> of <code>x64dbg</code></p>
 <h1 id="how-to-unpack-though">how to unpack though</h1>
 <h2 id="stage-01-the-loader">stage-01: the loader</h2>

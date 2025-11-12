@@ -132,7 +132,7 @@ When started analyzing it enfolds into multi-staged infection chain incorporatin
   />
 
   
-  <meta name="generator" content="Hugo 0.148.2">
+  <meta name="generator" content="Hugo 0.152.2">
 
   
   
@@ -465,7 +465,8 @@ Following snap shows process hollowing in action, where <code>MSBuild.exe</code>
 <p><img src="/mat-formbook-infection-chain/stage-4-capa-output.png" alt="stage-4-capa-output.png"></p>
 <p>It dynamically resolves <code>NtQueryVirtualMemory</code>, <code>NtProtectVirtualMemory</code> syscalls from <code>NTDLL.DLL</code> and uses custom <code>RC4</code> decryption routine along with many <code>XOR</code> operations to locate and decrypt a heavy chunk of prolly shellcode within the binary and invokes a function from it.</p>
 <blockquote>
-<p>I&rsquo;m planning to take an in-depth look on this infostealer in future post.</p></blockquote>
+<p>I&rsquo;m planning to take an in-depth look on this infostealer in future post.</p>
+</blockquote>
 <p>Till then stay tuned and have a nice time :)</p>
 <hr>
 <h1 id="iocs">IOCs</h1>
@@ -563,6 +564,10 @@ Following snap shows process hollowing in action, where <code>MSBuild.exe</code>
   <nav
     class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
   >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/mad-entry/evil-deno/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>[MAD] Entry-01 : Evil Deno Caught In Wild</span></a
+    >
     
     
     <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/guardians-paradox/"
