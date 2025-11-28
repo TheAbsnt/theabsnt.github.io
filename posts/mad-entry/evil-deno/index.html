@@ -38,10 +38,6 @@
 
 
 
-
-
-
-
 <html
   class="not-ready lg:text-base"
   style="--bg: #fbfbfb"
@@ -66,12 +62,17 @@
   
   
   
-  <meta name="description" content="What is MAD?
-MAD stands for Malware Analysis Diary.
-In these entries, I&rsquo;ll take a look and try analyzing some interesting and challenging binaries that may include: complex infection, techniques, reverse engineering, obfuscation, and try to cover variety of samples and so on.
-
+  <meta name="description" content="
 Context of this Entry
-The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let&rsquo;s get started!" />
+The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let&rsquo;s get started!
+
+stage01 : Evil Deno
+It all starts with an executable that sizes to approx.81.4MB, it&rsquo;s a DenoJS compiled executable:
+
+This holds the JavaScript to run in the resources section of the binary. This technique is referenced from Evil Deno.
+
+The JavaScript can be deobfuscated using deobfuscate.io. This simply contains a powershell command that&rsquo;ll execute another powershell script loaded from remote URL dynamically:
+" />
   <meta name="author" content="THEABSNT" />
   
 
@@ -101,10 +102,6 @@ The context originates from MalwareHunterTeam Tweet. This introduces an executab
   
   
   <link rel="preload" as="image" href="https://theabsnt.github.io/twitter.svg" />
-  
-  <link rel="preload" as="image" href="https://theabsnt.github.io/github.svg" />
-  
-  <link rel="preload" as="image" href="https://theabsnt.github.io/linkedin.svg" />
   
   <link rel="preload" as="image" href="https://theabsnt.github.io/rss.svg" />
   
@@ -143,18 +140,18 @@ The context originates from MalwareHunterTeam Tweet. This introduces an executab
   
   
   <meta itemprop="name" content="[MAD] Entry-01 : Evil Deno Caught In Wild">
-  <meta itemprop="description" content="What is MAD? MAD stands for Malware Analysis Diary. In these entries, I’ll take a look and try analyzing some interesting and challenging binaries that may include: complex infection, techniques, reverse engineering, obfuscation, and try to cover variety of samples and so on.
-Context of this Entry The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let’s get started!">
+  <meta itemprop="description" content="Context of this Entry The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let’s get started!
+stage01 : Evil Deno It all starts with an executable that sizes to approx.81.4MB, it’s a DenoJS compiled executable: This holds the JavaScript to run in the resources section of the binary. This technique is referenced from Evil Deno. The JavaScript can be deobfuscated using deobfuscate.io. This simply contains a powershell command that’ll execute another powershell script loaded from remote URL dynamically:">
   <meta itemprop="datePublished" content="2025-11-12T16:10:18+05:30">
   <meta itemprop="dateModified" content="2025-11-12T16:10:18+05:30">
-  <meta itemprop="wordCount" content="614">
+  <meta itemprop="wordCount" content="571">
   <meta itemprop="keywords" content="Reverse Engineering,Malware Analysis,Infection Chain,Mad">
   
   <meta property="og:url" content="https://theabsnt.github.io/posts/mad-entry/evil-deno/">
   <meta property="og:site_name" content="TheAbsnt">
   <meta property="og:title" content="[MAD] Entry-01 : Evil Deno Caught In Wild">
-  <meta property="og:description" content="What is MAD? MAD stands for Malware Analysis Diary. In these entries, I’ll take a look and try analyzing some interesting and challenging binaries that may include: complex infection, techniques, reverse engineering, obfuscation, and try to cover variety of samples and so on.
-Context of this Entry The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let’s get started!">
+  <meta property="og:description" content="Context of this Entry The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let’s get started!
+stage01 : Evil Deno It all starts with an executable that sizes to approx.81.4MB, it’s a DenoJS compiled executable: This holds the JavaScript to run in the resources section of the binary. This technique is referenced from Evil Deno. The JavaScript can be deobfuscated using deobfuscate.io. This simply contains a powershell command that’ll execute another powershell script loaded from remote URL dynamically:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -169,8 +166,8 @@ Context of this Entry The context originates from MalwareHunterTeam Tweet. This 
   
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="[MAD] Entry-01 : Evil Deno Caught In Wild">
-  <meta name="twitter:description" content="What is MAD? MAD stands for Malware Analysis Diary. In these entries, I’ll take a look and try analyzing some interesting and challenging binaries that may include: complex infection, techniques, reverse engineering, obfuscation, and try to cover variety of samples and so on.
-Context of this Entry The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let’s get started!">
+  <meta name="twitter:description" content="Context of this Entry The context originates from MalwareHunterTeam Tweet. This introduces an executable named GoogleDriverSetup.exe, It is compiled using Rust based JavaScript runtime called Deno. Let’s get started!
+stage01 : Evil Deno It all starts with an executable that sizes to approx.81.4MB, it’s a DenoJS compiled executable: This holds the JavaScript to run in the resources section of the binary. This technique is referenced from Evil Deno. The JavaScript can be deobfuscated using deobfuscate.io. This simply contains a powershell command that’ll execute another powershell script loaded from remote URL dynamically:">
 
   
   
@@ -278,26 +275,6 @@ Context of this Entry The context originates from MalwareHunterTeam Tweet. This 
       
       <a
         class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
-        style="--url: url(./github.svg)"
-        href="https://github.com/TheAbsnt"
-        target="_blank"
-        rel="me"
-      >
-        github
-      </a>
-      
-      <a
-        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
-        style="--url: url(./linkedin.svg)"
-        href="https://linkedin.com/in/sunil-shah-44b080328"
-        target="_blank"
-        rel="me"
-      >
-        linkedin
-      </a>
-      
-      <a
-        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
         style="--url: url(./rss.svg)"
         href="https://theabsnt.github.io/index.xml"
         target="_blank"
@@ -336,10 +313,7 @@ Context of this Entry The context originates from MalwareHunterTeam Tweet. This 
     
   </header>
 
-  <section><h1 id="what-is-mad">What is MAD?</h1>
-<p>MAD stands for Malware Analysis Diary.
-In these entries, I&rsquo;ll take a look and try analyzing some interesting and challenging binaries that may include: complex infection, techniques, reverse engineering, obfuscation, and try to cover variety of samples and so on.</p>
-<hr>
+  <section><hr>
 <h1 id="context-of-this-entry">Context of this Entry</h1>
 <p>The context originates from <a href="https://x.com/malwrhunterteam/status/1964023478060716437">MalwareHunterTeam Tweet</a>. This introduces an executable named <code>GoogleDriverSetup.exe</code>, It is compiled using Rust based JavaScript runtime called <a href="https://docs.deno.com/runtime/">Deno</a>. Let&rsquo;s get started!</p>
 <hr>
@@ -475,6 +449,10 @@ This script ensure persistence by creating a scheduled task for each user that&r
   <nav
     class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
   >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/mad-entry/asus-update-to-purerat/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>[MAD] Entry-02 : Vietnamese spreading PureRAT-y</span></a
+    >
     
     
     <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/formbook-infection-chain/"

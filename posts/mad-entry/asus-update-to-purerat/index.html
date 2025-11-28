@@ -1,0 +1,569 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en-us"
+  dir="ltr"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>[MAD] Entry-02 : Vietnamese spreading PureRAT-y - TheAbsnt</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Context of this Entry
+The context comes from Szaboles Schmidt Tweet, where he shared a zip file named setup.pkg, that contains three files AsusMouseDriver.sys, Inx, kg.cmd:
+
+
+Things to Setup : kg.cmd
+
+Turns out Inx is a legit command line RAR utility that&rsquo;ll extract content from AsusMouseDriver.sys rar archive file in C:\Users\Public\WindowsSecurity folder.
+Then gonna setup an AutoRun Key named UpdateService with command line to execute ntoskrnl.exe with arguments being .\Lib\image, dcal143" />
+  <meta name="author" content="THEABSNT" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://theabsnt.github.io/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/theme.svg" />
+
+  
+  
+  
+  
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8OXx8fGVufDB8fHx8fA%3D%3D" />
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/twitter.svg" />
+  
+  <link rel="preload" as="image" href="https://theabsnt.github.io/rss.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="https://theabsnt.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://theabsnt.github.io/favicon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.152.2">
+
+  
+  
+  
+  
+  
+  
+  <meta itemprop="name" content="[MAD] Entry-02 : Vietnamese spreading PureRAT-y">
+  <meta itemprop="description" content="Context of this Entry The context comes from Szaboles Schmidt Tweet, where he shared a zip file named setup.pkg, that contains three files AsusMouseDriver.sys, Inx, kg.cmd: Things to Setup : kg.cmd Turns out Inx is a legit command line RAR utility that’ll extract content from AsusMouseDriver.sys rar archive file in C:\Users\Public\WindowsSecurity folder.
+Then gonna setup an AutoRun Key named UpdateService with command line to execute ntoskrnl.exe with arguments being .\Lib\image, dcal143">
+  <meta itemprop="datePublished" content="2025-11-28T14:37:44+05:30">
+  <meta itemprop="dateModified" content="2025-11-28T14:37:44+05:30">
+  <meta itemprop="wordCount" content="1206">
+  <meta itemprop="keywords" content="Reverse Engineering,Malware Analysis,Infection Chain,Mad">
+  
+  <meta property="og:url" content="https://theabsnt.github.io/posts/mad-entry/asus-update-to-purerat/">
+  <meta property="og:site_name" content="TheAbsnt">
+  <meta property="og:title" content="[MAD] Entry-02 : Vietnamese spreading PureRAT-y">
+  <meta property="og:description" content="Context of this Entry The context comes from Szaboles Schmidt Tweet, where he shared a zip file named setup.pkg, that contains three files AsusMouseDriver.sys, Inx, kg.cmd: Things to Setup : kg.cmd Turns out Inx is a legit command line RAR utility that’ll extract content from AsusMouseDriver.sys rar archive file in C:\Users\Public\WindowsSecurity folder.
+Then gonna setup an AutoRun Key named UpdateService with command line to execute ntoskrnl.exe with arguments being .\Lib\image, dcal143">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-28T14:37:44+05:30">
+    <meta property="article:modified_time" content="2025-11-28T14:37:44+05:30">
+    <meta property="article:tag" content="Reverse Engineering">
+    <meta property="article:tag" content="Malware Analysis">
+    <meta property="article:tag" content="Infection Chain">
+    <meta property="article:tag" content="Mad">
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[MAD] Entry-02 : Vietnamese spreading PureRAT-y">
+  <meta name="twitter:description" content="Context of this Entry The context comes from Szaboles Schmidt Tweet, where he shared a zip file named setup.pkg, that contains three files AsusMouseDriver.sys, Inx, kg.cmd: Things to Setup : kg.cmd Turns out Inx is a legit command line RAR utility that’ll extract content from AsusMouseDriver.sys rar archive file in C:\Users\Public\WindowsSecurity folder.
+Then gonna setup an AutoRun Key named UpdateService with command line to execute ntoskrnl.exe with arguments being .\Lib\image, dcal143">
+
+  
+  
+
+  
+  <link rel="canonical" href="https://theabsnt.github.io/posts/mad-entry/asus-update-to-purerat/" />
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="https://theabsnt.github.io/"
+      >TheAbsnt</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fbfbfb'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/TheAbsnt"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./rss.svg)"
+        href="https://theabsnt.github.io/index.xml"
+        target="_blank"
+        rel="alternate"
+      >
+        rss
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">[MAD] Entry-02 : Vietnamese spreading PureRAT-y</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Nov 28, 2025</time>
+      
+      
+      
+      
+      <span class="mx-1">&middot;</span>
+      <span>THEABSNT</span>
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="context-of-this-entry">Context of this Entry</h1>
+<p>The context comes from <a href="https://x.com/smica83/status/1976718339314516476">Szaboles Schmidt Tweet</a>, where he shared a zip file named <code>setup.pkg</code>, that contains three files <code>AsusMouseDriver.sys</code>, <code>Inx</code>, <code>kg.cmd</code>:
+<img src="/mat-asus-to-purerat/samples-list.png" alt="samples-list"></p>
+<hr>
+<h1 id="things-to-setup--kgcmd">Things to Setup : kg.cmd</h1>
+<p><img src="/mat-asus-to-purerat/stg1-kg-cmd.png" alt="stg1-kg-cmd"></p>
+<p>Turns out <code>Inx</code> is a legit command line <code>RAR</code> utility that&rsquo;ll extract content from <code>AsusMouseDriver.sys</code> rar archive file in <code>C:\Users\Public\WindowsSecurity</code> folder.</p>
+<p>Then gonna setup an <code>AutoRun</code> Key named <code>UpdateService</code> with command line to execute <code>ntoskrnl.exe</code> with arguments being <code>.\Lib\image</code>, <code>dcal143</code></p>
+<p>Followed by running it immediately and displaying a decoy PDF created by <code>thatgirlpossesed4773</code>:
+<img src="/mat-asus-to-purerat/the-decoy-pdf.png" alt="the-decoy-pdf"></p>
+<p><code>AsusMouseDriver.sys</code> RAR archive contains legit files <code>Python3.10.11</code> environment liked renamed python executable to <code>ntoskrnl.exe</code> and supported DLLs,
+<img src="/mat-asus-to-purerat/asus-rar-contents.png" alt="asus-rar-contents">
+with only impostor ie. <code>Lib\image</code> python file being ran with argument <code>dcal143</code>.</p>
+<hr>
+<h1 id="the-loader-libimage">The Loader: Lib\image</h1>
+<p><img src="/mat-asus-to-purerat/stg2-python-loader.png" alt="stg2-python-loader">
+<em>(On the Left)</em> : we see that, <code>image</code> being python file, executes marshaled code-object after some decode (<code>b85</code>) and decompress (<code>bz2</code>, <code>zlib</code>) performed on a huge buffer.</p>
+<p><em>(On the Right)</em> : we&rsquo;ll form a <code>PYC</code> file by prepending Python3.10 <code>16-byte</code> magic header to the marshaled code-object to further make sense of it,</p>
+<p>The huge <code>74MB</code> size, shows indication of obfuscation by junk insertion.</p>
+<p>Trying to decompile the <code>PYC</code> file using <code>pycdc</code> or <code>pylingual</code> fails due to heavy variable nameobfuscation, and intentional use of opcodes that hinder decompilation, Looks like some protector is used:
+<img src="/mat-asus-to-purerat/stg2-pycdc-failed-output.png" alt="stg2-pycdc-failed-output"></p>
+<p>Going through the <code>pycdas</code> disassembly output, after replacing the python <code>co_varnames</code> to placeholder, we can make some guesses:</p>
+<p>Interesting variable and function names like <code>try_request_server</code>, <code>get_bytecodes</code>, <code>decrypt_code</code>, <code>rc4</code>, <code>base64</code>, <code>bz2</code>,  <code>zlib</code>, <code>requests</code> somewhat hints the behavior of this stage.
+<img src="/mat-asus-to-purerat/stg2-co-var-pyc-1.png" alt="stg2-co-varnames-pyc-1"></p>
+<p>Starting off with enough imports:
+<img src="/mat-asus-to-purerat/stg2-dis-import-pyc-1.png" alt="stg2-dis-import-pyc-1">
+It imports libraries like <code>sys</code>, <code>ctypes</code>,  <code>marshal</code>,  <code>zlib</code>,  <code>base64</code>,  <code>bz2</code>,  <code>inspect</code>,  <code>requests</code>.</p>
+<p>Something&rsquo;s being hidden:
+<img src="/mat-asus-to-purerat/stg2-dis-hide-pyc-1.png" alt="stg2-dis-hide-pyc-1"></p>
+<ul>
+<li><em>(684-692)</em>: <code>id = sys.argv[1]</code>, means <code>dcal143</code> is an <code>id</code></li>
+<li><em>(694-714)</em>: <code>ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)</code>, this will hide the console window</li>
+</ul>
+<p>Something&rsquo;s being requested:
+<img src="/mat-asus-to-purerat/stg2-dis-request-server-pyc-1.png" alt="stg2-dis-request-server-pyc-1"></p>
+<ul>
+<li><em>(2734-2736)</em>: declares the <code>RC4</code> decryption <code>KEY = b'phuongmai2005'</code></li>
+<li><em>(2738-2750)</em>: creates function <code>try_request_server()</code> that takes an argument as <code>ip_server</code>.</li>
+</ul>
+<p>Something&rsquo;s being executed:
+<img src="/mat-asus-to-purerat/stg2-dis-exec-pyc-1.png" alt="stg2-dis-exec-pyc-1"></p>
+<ul>
+<li><em>(4446-4460)</em>: <code>exec(marshal.loads(get_bytecodes(b64code))</code></li>
+</ul>
+<blockquote>
+<p><strong>TLDR;</strong> This stage will try to execute a marshal code-object fetched from remote URL, after some <code>Base64</code> decoding, <code>Zlib</code> decompression, and <code>RC4</code> decryption.</p>
+</blockquote>
+<p>As part of obfuscation, string constants are constructed dynamically with lots of lambda expression, which makes it kinda time taking to know the URL it&rsquo;ll reach to .</p>
+<p>But some mock runs gives the payload URL(as python will complain when ran with disabled network access):
+<img src="/mat-asus-to-purerat/stg2-mock-run-show-link.png" alt="sstg2-mock-run-show-link"></p>
+<p>Going to the URL reveals this active campaign, which they&rsquo;re constantly updating with scripts, as of writing, most recent addition is <code>dcal143v2.txt</code>:
+<img src="/mat-asus-to-purerat/opendir-link.png" alt="opendir-link">
+Now we can again get to the original <code>PYC</code> file that&rsquo;ll executed from <code>dcal143.txt</code>:
+<img src="/mat-asus-to-purerat/stg2-dcal143-decryption.png" alt="stg2-dcal143-decryption">
+<em>(On the Left-Bottom)</em> We see marshal bytes, then we do same as previous ie.  prepend magic header to form a new <code>PYC</code> file, then dump to further analyse.</p>
+<hr>
+<h1 id="the-injector--dcal143-python-marshal-object">The Injector : dcal143 Python Marshal-Object</h1>
+<p>Again this marshal code-objects are obfuscated, and performs anti-decompilation measure.</p>
+<p>Going through the variable and function names:
+<img src="/mat-asus-to-purerat/stg3-co-var-pyc-2.png" alt="stg3-co-var-pyc-2"></p>
+<p>Walking the disassembly, we see it defines many helper functions:
+<img src="/mat-asus-to-purerat/stg3-dis-functions-pyc-2.png" alt="stg3-dis-functions-pyc-2"></p>
+<ul>
+<li><em>(8214-8222)</em>: defines <code>NtWriteVirtualMemory</code> with argument types and return type, function for later use</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>NtWriteVirtualMemory <span style="color:#f92672">=</span> ntdll<span style="color:#f92672">.</span>NtWriteVirtualMemory
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NtWriteVirtualMemory<span style="color:#f92672">.</span>argtypes <span style="color:#f92672">=</span> [ wt<span style="color:#f92672">.</span>HANDLE, LPVOID, c_void_p, c_size_t, POINTER(c_size_t) ]
+</span></span><span style="display:flex;"><span>NtWriteVirtualMemory<span style="color:#f92672">.</span>restype <span style="color:#f92672">=</span> c_int
+</span></span></code></pre></div><ul>
+<li><em>(8224-8254)</em> : defines function like <code>killprocessbyid</code>, <code>runpe</code>, <code>shc_loader</code> and the names are self explanatory.</li>
+</ul>
+<p><img src="/mat-asus-to-purerat/stg3-dis-rc4-key-pyc-2.png" alt="stg3-dis-rc4-key-pyc-2"></p>
+<ul>
+<li><code>(before-8366)</code>: <code>base64_encrypted_pe</code> payload is constructed</li>
+<li><code>(8368-8370)</code>: declares <code>RC4</code> decryption <code>KEY = b'buiphuonglinh'</code></li>
+</ul>
+<p>Summarizing the following &lsquo;cause the disassembly was too long:
+It&rsquo;ll eventually take a look at the current running processes and stores them to <code>process_list</code>, here&rsquo;s the manual reconstruction of disassembly snippet:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>process_list <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>run(
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#39;tasklist&#39;</span>],     <span style="color:#75715e"># string constructed dynamically</span>
+</span></span><span style="display:flex;"><span>    stdout<span style="color:#f92672">=</span>PIPE,
+</span></span><span style="display:flex;"><span>    text<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>    creationflags<span style="color:#f92672">=</span>CREATE_NO_WINDOW
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">.</span>stdout
+</span></span></code></pre></div><p>then will eventually compares&rsquo;em against many antivirus processes strings, if found then exits immediately.</p>
+<p><img src="/mat-asus-to-purerat/stg3-dis-run-pe-call-pyc-2.png" alt="stg3-dis-run-pe-call-pyc-2"></p>
+<ul>
+<li><em>(8478-8482)</em>: calls <code>run_pe(base64_encrypted_pe, KEY)</code> that&rsquo;ll inject the next payload to a remote process</li>
+<li><em>(8488-8492)</em>: then sleeps for a while <code>time.sleep(20)</code></li>
+</ul>
+<p>Same goes to shellcode loader:
+<img src="/mat-asus-to-purerat/stg3-dis-shc-call-pyc-2.png" alt="stg3-dis-shc-call-pyc-2"></p>
+<ul>
+<li><em>(8634-8638)</em>  : <code>shc_loader(base64_encrypted_shc, KEY)</code></li>
+</ul>
+<blockquote>
+<p><strong>TLDR;</strong> This stage will eventually inject next stage to a remote process, plus inject and run the shellcode to the same process.</p>
+</blockquote>
+<p>We can get hold of <code>Base64</code> encrypted shellcode and <code>PE</code> by performing some python injection using a tool called <a href="https://github.com/Stanislav-Povolotsky/PyInjector?tab=readme-ov-file">PyInjector</a>:
+<img src="/mat-asus-to-purerat/stg3-python-injection-on-pyc-2.png" alt="stg3-python-injection-on-pyc-2">
+This will write the contents of <code>base64_encrypted_pe</code> and <code>base64_encrypted_shc</code> variables the was constructed dynamically to external files.</p>
+<h2 id="run_pe--pe-injection-into-cvtresexe">run_pe : PE Injection into cvtres.exe</h2>
+<p>Starts system utility <code>cvtres.exe</code> in this case, cross-checks its architecture, then uses combination of <code>CreateProcessA</code>, <code>GetThreadContext</code>, <code>NtUnmapViewOfSection</code>, <code>VirtualAllocEx</code>, <code>NtWriteVirtualMemory</code>, <code>SetThreadContext</code> API calls to perform injection:
+<img src="/mat-asus-to-purerat/stg3-pe-injection-cvtres.png" alt="stg3-pe-injection-cvtres"></p>
+<p>Now when decoded and <code>RC4</code> decrypted the content of  <code>b64_encrypted_pe</code>, we get to the next stage that <code>.NET Reactor</code> protected:
+<img src="/mat-asus-to-purerat/stg3-dotnet-decryption.png" alt="stg3-dotnet-decryption"></p>
+<h2 id="shc_loader-injection-to-same-process">shc_loader: Injection to same process</h2>
+<p>This function uses <code>VirtualAlloc</code>, <code>CreateThread</code>, <code>RtlMoveMemory</code>, <code>WaitForSingleObject</code>, <code>ResumeThread</code> API calls to inject the shellcode in the same process, the <code>x64dbg-&gt;Dump1</code> in following snap shows the shellcode being ran:
+<img src="/mat-asus-to-purerat/stg3-shc-injection.png" alt="stg3-shc-injection"></p>
+<p>Again when decode and decrypted, we see that this shellcode is generated using an open source tool <a href="https://github.com/TheWover/donut">donut</a>:
+<img src="/mat-asus-to-purerat/stg3-shc-decryption.png" alt="stg3-shc-decryption"></p>
+<hr>
+<h1 id="the-donut-shellcode-being-position-independent">The Donut Shellcode: Being Position-Independent</h1>
+<p>Taking a quick triage look with <a href="https://github.com/mandiant/capa">capa</a>, we see this shellcode uses some <code>aPLib</code> data decompression, <code>chaskey</code> encryption use and <code>PEB</code> access, all smells like donut innit? :
+<img src="/mat-asus-to-purerat/stg3-shc-capa-out.png" alt="stg3-shc-capa-out"></p>
+<p>The following routine is a part of Donut&rsquo;s <code>chaskey</code> decryption routine that decrypts the next stage for in-memory execution as <a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/application-domains">AppDomain</a>:
+<img src="/mat-asus-to-purerat/stg3-decomp-shc-1.png" alt="stg3-decomp-shc-1"></p>
+<p><img src="/mat-asus-to-purerat/stg3-decomp-shc-2.png" alt="stg3-decomp-shc-2">
+Above subroutine will bypasses <code>Antimalware Scan Interface (AMSI)</code> and <code>Event Tracing for Windows (ETW)</code> by patching related API like <code>AmsiScanBuffer</code>, <code>AmsiScanBuffer</code>, <code>EtwEventWrite</code> and so, shows that the shellcode was generated with option <code>-b (bypass)</code> option enabled (refer to Donut github repo for more):</p>
+<hr>
+<h1 id="the-loader-again--yxolpexe-a-net-assembly">The Loader Again : Yxolp.exe A .Net Assembly</h1>
+<p><img src="/mat-asus-to-purerat/stg4-dnspy-main.png" alt="stg4-dnspy-main">
+<img src="/mat-asus-to-purerat/stg4-dnspy-main-2.png" alt="stg4-dnspy-main-2">
+This stage will invoke <code>mlBlFRODqNj9jxsZ5wv.LrNv6COPJYQa5wBkwqU -&gt; KU8OtPPFaB()</code> method from .NET assembly that is retrieved from the resources section:
+<img src="/mat-asus-to-purerat/stg4-dnspy-target-rsrc.png" alt="stg4-dnspy-target-rsrc"></p>
+<p>The <code>TripleDES</code> key and <code>IV</code> are <code>Base64</code> encoded:
+<img src="/mat-asus-to-purerat/stg4-dnspy-key-iv.png" alt="stg4-dnspy-key-iv"></p>
+<p>The method being invoked:
+<img src="/mat-asus-to-purerat/stg4-dnspy-method-invoke.png" alt="stg4-dnspy-method-invoke"></p>
+<p>Following <code>emit</code> will <code>TripleDES</code> decrypt and <code>Zlib</code> decompress the <code>Hxyez</code> resource from this assembly, we get to last stage that is <code>.NET Reactor</code> protected <code>DLL</code> file:
+<img src="/mat-asus-to-purerat/stg4-rsrc-decryption.png" alt="stg4-rsrc-decryption"></p>
+<hr>
+<h1 id="the-purerat-ftprotobuf--mvgnddll">The PureRAT Ft.ProtoBuf : Mvgnd.dll</h1>
+<p>We&rsquo;ll use <a href="https://github.com/SychicBoy/NETReactorSlayer">NETReactorSlayer</a> to get comparatively cleaner version, I&rsquo;ll go through some of the workings in particular:
+<img src="/mat-asus-to-purerat/stg5-dnspy-proto-stuff-1.png" alt="stg5-dnspy-proto-stuff-1">
+This stage take use of  Protocol Buffers (<a href="https://github.com/protobuf-net/protobuf-net">protobuf-net</a>) for deserialization. On such buffer when deserialized reveals C2 server(<code>151.242.170[.228]</code>) and ports(<code>56001</code>, <code>56002</code>, <code>56003</code>, <code>56004</code>, <code>56005</code>, <code>56007</code>), along with another <code>Base64</code> encoded buffer that certificate for <code>TLS</code> pinning,  followed by some other  values:
+<img src="/mat-asus-to-purerat/stg5-dnspy-proto-stuff-2.png" alt="stg5-dnspy-proto-stuff-2"></p>
+<p>Most of the strings are not decrypted by <code>.NETSalyer</code>, but we&rsquo;ll go through some of functionalities:
+<img src="/mat-asus-to-purerat/stg5-dnspy-socket-setup.png" alt="stg5-dnspy-socket-setup">
+above code performs socket setup with TLS pinning,</p>
+<p><img src="/mat-asus-to-purerat/stg5-dnspy-mutex-create.png" alt="stg5-dnspy-mutex-create">
+Mutex creation used to make sure only one instance is running,</p>
+<p><img src="/mat-asus-to-purerat/stg5-dnspy-registry-set.png" alt="stg5-dnspy-registry-set">
+does persistence via registry key addition with binary value,</p>
+<p><img src="/mat-asus-to-purerat/stg5-dnspy-wmi-query.png" alt="stg5-dnspy-wmi-query">
+WMI query maybe for checking any Antivirus products presence,</p>
+<p><img src="/mat-asus-to-purerat/stg5-dnspy-screen-capture.png" alt="stg5-dnspy-screen-capture">
+capture full screen shot does some conversion to <code>jpeg</code> to store them as an array, to eventually send them to C2 servers,</p>
+<p><img src="/mat-asus-to-purerat/stg5-dnspy-restart.png" alt="stg5-dnspy-restart">
+this tries to keep itself running, no matter the exceptions occurred.</p>
+<p>And contains other features like fingerprinting via GUID and system resources, capability to execute other plugins received from C2 server, looks for Crypto Wallet credentials from file system paths (<code>%APPDATA%</code>), and registry keys and so on.</p>
+<hr>
+<p>The frequent use of deserialzed ProtoBuf object, along with other characteristics resembles of this being PureRAT/PXA Stealer (similarity found in other incidents). Many variable from python loader/injectors are in Vietnamese, but the C2 server is located in Singapore, It is possible that they&rsquo;re using remote servers.</p>
+<blockquote>
+<p>See ya in another post, till then have a nice time :)</p>
+</blockquote>
+<hr>
+<h1 id="iocs">IOC(s)</h1>
+<ul>
+<li>source : <a href="https://x.com/smica83/status/1976718339314516476">https://x.com/smica83/status/1976718339314516476</a></li>
+<li><code>setup.pkg</code> : <code>45f9b2a451141d50faf17513f0d78064716dc673a976e77da0bdf7fe27719106</code></li>
+<li><code>https[:]//104.194.153[.]193/homepage/links?id=dcal143</code></li>
+<li><code>Yxolp.exe</code> .NET Assembly: <code>3de860c805c65fadae42459736cfebd92e4636c1964d8c21049b990d1c5f90f0</code></li>
+<li>donut shellcode: <code>40a6d7433ca98739f07fd0658cf3ecdd4c8119d601308122fc78dce8a2e47812</code></li>
+<li><code>Mvgnd.dll</code> .NET Assembly : <code>380b32e1c665993dcc4691bc1161ae5c44f94e7aeefe31adcd9acd83bc8313c2</code></li>
+<li>C2 server : <code>151.242.170[.]228</code></li>
+</ul>
+<hr>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/reverse-engineering"
+      >reverse engineering</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/malware-analysis"
+      >malware analysis</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/infection-chain"
+      >infection chain</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://theabsnt.github.io/tags/mad"
+      >mad</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/mad-entry/evil-deno/"
+      ><span>[MAD] Entry-01 : Evil Deno Caught In Wild</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2025
+    <a class="link" href="https://theabsnt.github.io/">TheAbsnt</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>
