@@ -9,35 +9,28 @@
     <lastBuildDate>Mon, 24 Mar 2025 00:10:14 +0530</lastBuildDate>
     <atom:link href="https://theabsnt.github.io/tags/zero2auto/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Challenge #2: IcedID Configuration Extraction</title>
+      <title>[Z2A Challenge-02] : IcedID Configuration Extraction</title>
       <link>https://theabsnt.github.io/posts/z2a_chall/ch02-iced-config-extraction/</link>
       <pubDate>Mon, 24 Mar 2025 00:10:14 +0530</pubDate>
       <guid>https://theabsnt.github.io/posts/z2a_chall/ch02-iced-config-extraction/</guid>
       <description>&lt;h1 id=&#34;the-agenda&#34;&gt;the agenda&lt;/h1&gt;&#xA;&lt;p&gt;Welcome back!.. and i hope you&amp;rsquo;re having a nice time :)&lt;/p&gt;&#xA;&lt;p&gt;This is a quick write-up that will go through the process of unpacking the initial IcedID malware loader and extract, decrypt and display the configuration from the unpacked stage of this malware,&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;this is the second challenge from the course &lt;a href=&#34;https://www.0ffset.net/training/zero2auto/&#34;&gt;Zero2Automated&lt;/a&gt; as part of their bi-weekly challenges&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;the-file-triage&#34;&gt;the file triage&lt;/h1&gt;&#xA;&lt;p&gt;The sample we&amp;rsquo;re provided with is a &lt;code&gt;PE64 DLL&lt;/code&gt; file with &lt;code&gt;SHA256&lt;/code&gt; hash &lt;code&gt;0581f0bf260a11a5662d58b99a82ec756c9365613833bce8f102ec1235a7d4f7&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Challenge #1: Gozi String Decryption</title>
+      <title>[Z2A Challenge-01] : Gozi String Decryption</title>
       <link>https://theabsnt.github.io/posts/z2a_chall/ch01_gozi_string_decryption/</link>
       <pubDate>Thu, 03 Oct 2024 00:40:09 +0530</pubDate>
       <guid>https://theabsnt.github.io/posts/z2a_chall/ch01_gozi_string_decryption/</guid>
       <description>&lt;h1 id=&#34;whats-the-agenda&#34;&gt;what&amp;rsquo;s the agenda&lt;/h1&gt;&#xA;&lt;p&gt;Welcome back :)&lt;/p&gt;&#xA;&lt;p&gt;Today we&amp;rsquo;ll go through a challenge from &lt;a href=&#34;https://www.0ffset.net/training/zero2auto/&#34;&gt;Zero2Automated: Advanced Malware Analysis&lt;/a&gt; which ask us to reverse engineer the string decryption routine and write an automation script for it.&lt;/p&gt;&#xA;&lt;p&gt;The sample provided is a Gozi/ISFB malware which is couple of years old and is packed, also checking file entropy of &lt;code&gt;7.5&lt;/code&gt; says many random bytes are present which supports file being packed.&lt;/p&gt;&#xA;&lt;p&gt;It&amp;rsquo;s a PE32 DLL file with &lt;code&gt;SHA256&lt;/code&gt; hash of &lt;code&gt;0a66e8376fc6d9283e500c6e774dc0a109656fd457a0ce7dbf40419bc8d50936&lt;/code&gt;. Strings output consist mostly of random strings, with some noticeable strings here n there like a PDB file path &lt;code&gt;d:\in\the\town\where\ahung.pdb&lt;/code&gt; and a file name &lt;code&gt;myfile.exe&lt;/code&gt; in version info.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)</title>
-      <link>https://theabsnt.github.io/posts/z2ach03/part03/</link>
-      <pubDate>Thu, 17 Aug 2023 09:35:05 +0530</pubDate>
-      <guid>https://theabsnt.github.io/posts/z2ach03/part03/</guid>
-      <description>&lt;p&gt;Welcome back.. and i hope you all are having a nice time :).&lt;/p&gt;&#xA;&lt;p&gt;In this last part of analysing challenge binary from Z2A: Ch03 (Practical Analysis). We gonna take look at mighty capabilities this binary hiding within it. So, let&amp;rsquo;s get started&amp;hellip;&lt;/p&gt;&#xA;&lt;h1 id=&#34;inside-main&#34;&gt;Inside &amp;lsquo;main()&amp;rsquo;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://theabsnt.github.io/mat_z2ach03/Pseudocode_sub_401000_stage03.png&#34; alt=&#34;ida decompiled main()&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;All this stage does is display a message box and exit&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://theabsnt.github.io/mat_z2ach03/MessageBox_prompted_by_stage03.png&#34; alt=&#34;message_prompted_stage03&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;&#xA;&lt;p&gt;gotcha guys, i was making the hype about satge03 capabilties,&#xA;jokes apart this binary just shows a message box and exit. Hope you had fun reading this walkthrough and i&amp;rsquo;ll see you in another post.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)</title>
+      <title>[Zero2Auto] : CH03 Practical Analysis Challenge - Part II</title>
       <link>https://theabsnt.github.io/posts/z2ach03/part02/</link>
       <pubDate>Mon, 14 Aug 2023 15:46:46 +0530</pubDate>
       <guid>https://theabsnt.github.io/posts/z2ach03/part02/</guid>
       <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;I encourage you to follow this writeup along with your analysis&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;stage02-extracted-from-resource-section-of-main_binexe&#34;&gt;Stage02: Extracted from resource section of main_bin.exe&lt;/h1&gt;&#xA;&lt;p&gt;Welcome back, in this part-II of analysing the challenge binary from Z2A: Ch03 (Practical Analysis) we gonna take a thorough look at the second payload extracted from &lt;code&gt;.rsrc&lt;/code&gt; section and injected into another process of stage01 (&lt;code&gt;main_bin.exe&lt;/code&gt;). So, let&amp;rsquo;s get started from the &lt;code&gt;main&lt;/code&gt; of this stage..&lt;/p&gt;&#xA;&lt;h1 id=&#34;inside-main&#34;&gt;Inside &amp;lsquo;main()&amp;rsquo;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://theabsnt.github.io/mat_z2ach03/Pseudocode_sub_main_stage02_1_half.png&#34; alt=&#34;decompiled main() stage02_1&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-I)</title>
+      <title>[Zero2Auto] : CH03 Practical Analysis Challenge - Part I</title>
       <link>https://theabsnt.github.io/posts/z2ach03/part01/</link>
       <pubDate>Mon, 14 Aug 2023 15:25:42 +0530</pubDate>
       <guid>https://theabsnt.github.io/posts/z2ach03/part01/</guid>

@@ -141,7 +141,7 @@ Then gonna setup an AutoRun Key named UpdateService with command line set to exe
 Then gonna setup an AutoRun Key named UpdateService with command line set to execute ntoskrnl.exe with arguments being .\Lib\image, dcal143">
   <meta itemprop="datePublished" content="2025-11-28T14:37:44+05:30">
   <meta itemprop="dateModified" content="2025-11-28T14:37:44+05:30">
-  <meta itemprop="wordCount" content="1204">
+  <meta itemprop="wordCount" content="1213">
   <meta itemprop="keywords" content="Reverse Engineering,Malware Analysis,Infection Chain,Mad">
   
   <meta property="og:url" content="https://theabsnt.github.io/posts/mad-entry/asus-update-to-purerat/">
@@ -383,7 +383,7 @@ Starting off with enough imports, it imports libraries like <code>sys</code>, <c
 <li><code>(8368-8370)</code>: declares <code>RC4</code> decryption <code>KEY = b'buiphuonglinh'</code></li>
 </ul>
 <p>Summarizing the following &lsquo;cause the disassembly was too long:
-It&rsquo;ll take a look at the current running processes then store them to <code>process_list</code> variable, here&rsquo;s the manual reconstruction of disassembly snippet:</p>
+It&rsquo;ll take a look at the current running processes then store them to <code>process_list</code> variable, following is the manual reconstruction of disassembly snippet:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>process_list <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>run(
 </span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#39;tasklist&#39;</span>],     <span style="color:#75715e"># string constructed dynamically</span>
 </span></span><span style="display:flex;"><span>    stdout<span style="color:#f92672">=</span>PIPE,
@@ -396,10 +396,9 @@ It&rsquo;ll take a look at the current running processes then store them to <cod
 <li><em>(8478-8482)</em>: calls <code>run_pe(base64_encrypted_pe, KEY)</code> that&rsquo;ll inject the next payload to a remote process</li>
 <li><em>(8488-8492)</em>: then sleeps for a while <code>time.sleep(20)</code></li>
 </ul>
-<p>Same goes to shellcode loader:
-<img src="/mat-asus-to-purerat/stg3-dis-shc-call-pyc-2.png" alt="stg3-dis-shc-call-pyc-2"></p>
+<p><img src="/mat-asus-to-purerat/stg3-dis-shc-call-pyc-2.png" alt="stg3-dis-shc-call-pyc-2"></p>
 <ul>
-<li><em>(8634-8638)</em>  : <code>shc_loader(base64_encrypted_shc, KEY)</code></li>
+<li><em>(8634-8638)</em>  : <code>shc_loader(base64_encrypted_shc, KEY)</code> same goes to shellcode loader</li>
 </ul>
 <blockquote>
 <p><strong>TLDR;</strong> This stage will eventually inject next stage to a remote process, plus inject and run the shellcode to the same process.</p>
@@ -424,7 +423,7 @@ This will write the contents of <code>base64_encrypted_pe</code> and <code>base6
 <p>The following routine from the shellcode is a part of Donut&rsquo;s <code>chaskey</code> decryption routine that decrypts the next stage for in-memory execution as <a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/application-domains">AppDomain</a>:
 <img src="/mat-asus-to-purerat/stg3-decomp-shc-1.png" alt="stg3-decomp-shc-1"></p>
 <p><img src="/mat-asus-to-purerat/stg3-decomp-shc-2.png" alt="stg3-decomp-shc-2">
-Above snippet bypasses <code>Antimalware Scan Interface (AMSI)</code> and <code>Event Tracing for Windows (ETW)</code> by patching related API like <code>AmsiScanBuffer</code>, <code>AmsiScanString</code>, <code>EtwEventWrite</code>, <code>EtwEventUnregister</code>, shows that the shellcode was generated with option <code>-b (bypass)</code> enabled (refer to Donut github repo for more).</p>
+Above snippet bypasses <code>Antimalware Scan Interface (AMSI)</code> and <code>Event Tracing for Windows (ETW)</code> by patching related API like <code>AmsiScanBuffer</code>, <code>AmsiScanString</code>, <code>EtwEventWrite</code>, <code>EtwEventUnregister</code>, shows that the shellcode was generated with option <code>-b (bypass)</code> enabled (refer to donut github repo for more).</p>
 <hr>
 <h1 id="the-loader-again--yxolpexe-the-net-assembly">The Loader Again : Yxolp.exe The .Net Assembly</h1>
 <p><img src="/mat-asus-to-purerat/stg4-dnspy-main.png" alt="stg4-dnspy-main">
@@ -441,7 +440,7 @@ This stage will invoke <code>mlBlFRODqNj9jxsZ5wv.LrNv6COPJYQa5wBkwqU -&gt; KU8Ot
 <h1 id="the-purerat-ft-protobuf--mvgnddll">The PureRAT Ft. ProtoBuf : Mvgnd.dll</h1>
 <p>We&rsquo;ll use <a href="https://github.com/SychicBoy/NETReactorSlayer">NETReactorSlayer</a> to get comparatively cleaner version, I&rsquo;ll go through some of the workings in particular:
 <img src="/mat-asus-to-purerat/stg5-dnspy-proto-stuff-1.png" alt="stg5-dnspy-proto-stuff-1">
-This stage take use of  Protocol Buffers (<a href="https://github.com/protobuf-net/protobuf-net">protobuf-net</a>) for deserialization. One such buffer when deserialized reveals C2 server(<code>151.242.170[.228]</code>) and ports(<code>56001</code>, <code>56002</code>, <code>56003</code>, <code>56004</code>, <code>56005</code>, <code>56007</code>), along with another <code>Base64</code> encoded buffer blob that decodes to an X509 certificate used for TLS pinning, followed by some other values:
+This stage take use of  Protocol Buffers (<a href="https://github.com/protobuf-net/protobuf-net">protobuf-net</a>) for deserialization. One such buffer when deserialized reveals C2 server <code>151.242.170[.228]</code>  and ports <code>56001</code>, <code>56002</code>, <code>56003</code>, <code>56004</code>, <code>56005</code>, <code>56007</code>, along with another <code>Base64</code> encoded buffer blob that decodes to an X509 certificate used for TLS pinning, followed by some other values (see right bottom of following snap):
 <img src="/mat-asus-to-purerat/stg5-dnspy-proto-stuff-2.png" alt="stg5-dnspy-proto-stuff-2"></p>
 <p>Most of the strings are not decrypted by <code>.NETSlayer</code>, but we get the spirit of these snipppets:
 <img src="/mat-asus-to-purerat/stg5-dnspy-socket-setup.png" alt="stg5-dnspy-socket-setup">
@@ -451,9 +450,9 @@ above code performs socket setup with TLS pinning, for encrypted C2 communicatio
 <p><img src="/mat-asus-to-purerat/stg5-dnspy-registry-set.png" alt="stg5-dnspy-registry-set">
 does persistence via registry key addition with binary value,</p>
 <p><img src="/mat-asus-to-purerat/stg5-dnspy-wmi-query.png" alt="stg5-dnspy-wmi-query">
-WMI query prolly checking any Antivirus product presence,</p>
+WMI query prolly checking any antivirus product presence,</p>
 <p><img src="/mat-asus-to-purerat/stg5-dnspy-screen-capture.png" alt="stg5-dnspy-screen-capture">
-capture full screen shot does some conversion to <code>jpeg</code> to store them as an array, to eventually send them to C2 servers,</p>
+capture full screenshot then does some conversion to <code>JPEG</code> to store them as an array, to eventually send them to C2 servers,</p>
 <p><img src="/mat-asus-to-purerat/stg5-dnspy-restart.png" alt="stg5-dnspy-restart">
 above snippet tries to keep itself running, no matter the exceptions occurred.</p>
 <p>Also contains many more features like fingerprinting via <code>GUID</code> and system resources, capability to execute other plugins received from C2 server, looks for Crypto Wallet credentials from file system paths (<code>%APPDATA%</code>), and registry keys and so on.</p>

@@ -9,14 +9,14 @@
     <lastBuildDate>Fri, 30 Aug 2024 14:52:23 +0530</lastBuildDate>
     <atom:link href="https://theabsnt.github.io/tags/steamhide/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>SteamHide Malware Analysis - II</title>
+      <title>SteamHide Malware Analysis : Part II</title>
       <link>https://theabsnt.github.io/posts/steamhide/part02/</link>
       <pubDate>Fri, 30 Aug 2024 14:52:23 +0530</pubDate>
       <guid>https://theabsnt.github.io/posts/steamhide/part02/</guid>
       <description>&lt;p&gt;Welcome back :D,&#xA;This post is the continuation of SteamHide malware analysis, here we&amp;rsquo;ll go through the second stage &lt;code&gt;FinalMalware.exe&lt;/code&gt; dropped by &lt;code&gt;Hide binary inside image.exe&lt;/code&gt; downloader by decrypting the ICC profile after pulling out image from stream profile images. Let&amp;rsquo;s get started!!&lt;/p&gt;&#xA;&lt;h1 id=&#34;initial-triage-for-finalmalwareexe&#34;&gt;Initial triage for &amp;lsquo;FinalMalware.exe&amp;rsquo;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;file-identification&#34;&gt;File identification&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://theabsnt.github.io/mat_steamhide/stage02/meta_file_Identification_stage02.png&#34; alt=&#34;meta_fileIdentification&#34;&gt;&#xA;Again &lt;code&gt;DIE&lt;/code&gt; and &lt;code&gt;PortexAnalyzer&lt;/code&gt; outputs indicates that it&amp;rsquo;s a &lt;code&gt;PE 32bit&lt;/code&gt; .NET managed assembly file, we&amp;rsquo;ll use &lt;code&gt;dnSpy&lt;/code&gt; for further examination&lt;/p&gt;</description>
     </item>
     <item>
-      <title>SteamHide Malware Analysis - I</title>
+      <title>SteamHide Malware Analysis : Part I</title>
       <link>https://theabsnt.github.io/posts/steamhide/part01/</link>
       <pubDate>Fri, 30 Aug 2024 11:51:36 +0530</pubDate>
       <guid>https://theabsnt.github.io/posts/steamhide/part01/</guid>

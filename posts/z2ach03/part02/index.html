@@ -53,7 +53,7 @@
   />
 
   
-  <title>Zero2Auto: Ch03-Practical Analysis Challenge (Part-II) - TheAbsnt</title>
+  <title>[Zero2Auto] : CH03 Practical Analysis Challenge - Part II - TheAbsnt</title>
 
   
   <meta name="theme-color" />
@@ -133,16 +133,16 @@ Inside &lsquo;main()&rsquo;
   
   
   
-  <meta itemprop="name" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)">
+  <meta itemprop="name" content="[Zero2Auto] : CH03 Practical Analysis Challenge - Part II">
   <meta itemprop="description" content="Analysing Stage02 of CH03 Challenge binary">
   <meta itemprop="datePublished" content="2023-08-14T15:46:46+05:30">
   <meta itemprop="dateModified" content="2023-08-14T15:46:46+05:30">
-  <meta itemprop="wordCount" content="1602">
+  <meta itemprop="wordCount" content="1632">
   <meta itemprop="keywords" content="Reverse Engineering,Zero2auto">
   
   <meta property="og:url" content="https://theabsnt.github.io/posts/z2ach03/part02/">
   <meta property="og:site_name" content="TheAbsnt">
-  <meta property="og:title" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)">
+  <meta property="og:title" content="[Zero2Auto] : CH03 Practical Analysis Challenge - Part II">
   <meta property="og:description" content="Analysing Stage02 of CH03 Challenge binary">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
@@ -155,7 +155,7 @@ Inside &lsquo;main()&rsquo;
   
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)">
+  <meta name="twitter:title" content="[Zero2Auto] : CH03 Practical Analysis Challenge - Part II">
   <meta name="twitter:description" content="Analysing Stage02 of CH03 Challenge binary">
 
   
@@ -285,7 +285,7 @@ Inside &lsquo;main()&rsquo;
 
 <article>
   <header class="mb-14">
-    <h1 class="!my-0 pb-2.5">Zero2Auto: Ch03-Practical Analysis Challenge (Part-II)</h1>
+    <h1 class="!my-0 pb-2.5">[Zero2Auto] : CH03 Practical Analysis Challenge - Part II</h1>
 
     
     <div class="text-xs antialiased opacity-60">
@@ -465,8 +465,14 @@ TIP: How to break into sub_401DCO ?
 <li>then finally call <code>ResumeThread()</code> to continue execution of child <code>svchost.exe</code> from stage03&rsquo;s entry point</li>
 </ul>
 <hr>
-<h1 id="automations-for-this-binary">Automations for this binary</h1>
-<h3 id="--api-hash-resolve">- API hash resolve</h3>
+<h1 id="stage03--inside-main">Stage03 : Inside &lsquo;main()&rsquo;</h1>
+<p><img src="/mat_z2ach03/Pseudocode_sub_401000_stage03.png" alt="ida decompiled main()"></p>
+<p>All this stage does is display a message box and exit.</p>
+<p><img src="/mat_z2ach03/MessageBox_prompted_by_stage03.png" alt="message_prompted_stage03"></p>
+<p>Hope you had fun reading this walkthrough and I&rsquo;ll see you in another post.</p>
+<p>Till then have a nice time :)</p>
+<hr>
+<h1 id="api-hash-resolve">API hash resolve</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># api_name_resolve.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Author: ME :D</span>
 </span></span><span style="display:flex;"><span>
@@ -494,7 +500,7 @@ TIP: How to break into sub_401DCO ?
 </span></span><span style="display:flex;"><span>    main()
 </span></span></code></pre></div><!-- <script src="https://gist.github.com/TheAbsnt/64358e60a8ba2075f445524e492514ad.js"></script>
  -->
-<h3 id="--stage03-extractiondecryption-from-png-file-data">- Stage03 Extraction/Decryption from PNG file data</h3>
+<h1 id="stage03-extractiondecryption-from-png-file-data">Stage03 Extraction/Decryption from PNG file data</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># stage03_extraction.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Author: ME :D</span>
 </span></span><span style="display:flex;"><span>
@@ -545,13 +551,13 @@ TIP: How to break into sub_401DCO ?
     class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
   >
     
-    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/z2ach03/part03/"
-      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Zero2Auto: Ch03-Practical Analysis Challenge (Part-III)</span></a
+    <a class="ltr:pr-3 rtl:pl-3" href="https://theabsnt.github.io/posts/steamhide/part01/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>SteamHide Malware Analysis : Part I</span></a
     >
     
     
     <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="https://theabsnt.github.io/posts/z2ach03/part01/"
-      ><span>Zero2Auto: Ch03-Practical Analysis Challenge (Part-I)</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+      ><span>[Zero2Auto] : CH03 Practical Analysis Challenge - Part I</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
     >
     
   </nav>
