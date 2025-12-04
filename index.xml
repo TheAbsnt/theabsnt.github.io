@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>TheAbsnt</title>
+      <link>https://https://theabsnt.github.io/</link>
+      <description>Last 10 notes on TheAbsnt</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Entry-02 : Vietnamese spreading PureRAT-y</title>
+    <link>https://https://theabsnt.github.io/mad-entry/asus-update-to-purerat</link>
+    <guid>https://https://theabsnt.github.io/mad-entry/asus-update-to-purerat</guid>
+    <description><![CDATA[ Context of this Entry The context comes from Szabolcs Schmidt Tweet, where he shared a zip file named setup.pkg, that contains three files AsusMouseDriver.sys, Inx, kg.cmd: Things to Setup : kg.cmd Turns out Inx is a legit command line RAR utility that’ll extract contents from AsusMouseDriver.sys ra... ]]></description>
+    <pubDate>Fri, 28 Nov 2025 09:07:44 GMT</pubDate>
+  </item><item>
+    <title>Entry-01 : Evil Deno Caught In Wild</title>
+    <link>https://https://theabsnt.github.io/mad-entry/evil-deno</link>
+    <guid>https://https://theabsnt.github.io/mad-entry/evil-deno</guid>
+    <description><![CDATA[ Context of this Entry The context originates from MalwareHunterTeam Tweet. ]]></description>
+    <pubDate>Wed, 12 Nov 2025 10:40:18 GMT</pubDate>
+  </item><item>
+    <title>Memory-Only Mayhem : JScript to Powershell to .NET Loader to Infostealer</title>
+    <link>https://https://theabsnt.github.io/malware-analysis/formbook-infection-chain</link>
+    <guid>https://https://theabsnt.github.io/malware-analysis/formbook-infection-chain</guid>
+    <description><![CDATA[ An Introduction Welcome back and I hope you guys are having a nice time :) Couple of weeks ago, while i was looking for a malware to analyze, I came across this sample on malware bazaar, that is initially a JScript file. ]]></description>
+    <pubDate>Sun, 24 Aug 2025 20:29:15 GMT</pubDate>
+  </item><item>
+    <title>Guardians Paradox : When Protector becomes Predator (Malware Version)</title>
+    <link>https://https://theabsnt.github.io/misc/guardians-paradox</link>
+    <guid>https://https://theabsnt.github.io/misc/guardians-paradox</guid>
+    <description><![CDATA[ The introduction Welcome back!. ]]></description>
+    <pubDate>Fri, 28 Mar 2025 19:17:42 GMT</pubDate>
+  </item><item>
+    <title>Z2A Challenge-02 : IcedID Configuration Extraction</title>
+    <link>https://https://theabsnt.github.io/z2a-biweekly-challenges/ch02-iced-config-extraction</link>
+    <guid>https://https://theabsnt.github.io/z2a-biweekly-challenges/ch02-iced-config-extraction</guid>
+    <description><![CDATA[ the agenda Welcome back!. ]]></description>
+    <pubDate>Sun, 23 Mar 2025 18:40:14 GMT</pubDate>
+  </item><item>
+    <title>Analysis of RedDelta&#039;s recent Infection Chain</title>
+    <link>https://https://theabsnt.github.io/malware-analysis/redDelta-malware-campaign-aug-2024</link>
+    <guid>https://https://theabsnt.github.io/malware-analysis/redDelta-malware-campaign-aug-2024</guid>
+    <description><![CDATA[ The introduction In this blog, we’ll explore a recent infection chain of malware campaign carried out by Chinese State Sponsored threat actor RedDelta to deliver customized PlugX malware. ]]></description>
+    <pubDate>Tue, 18 Feb 2025 12:02:36 GMT</pubDate>
+  </item><item>
+    <title>Z2A Challenge-01 : Gozi String Decryption</title>
+    <link>https://https://theabsnt.github.io/z2a-biweekly-challenges/ch01_gozi_string_decryption</link>
+    <guid>https://https://theabsnt.github.io/z2a-biweekly-challenges/ch01_gozi_string_decryption</guid>
+    <description><![CDATA[ what’s the agenda Welcome back :) Today we’ll go through a challenge from Zero2Automated: Advanced Malware Analysis which ask us to reverse engineer the string decryption routine and write an automation script for it. ]]></description>
+    <pubDate>Wed, 02 Oct 2024 19:10:09 GMT</pubDate>
+  </item><item>
+    <title>SteamHide Malware Analysis : Part II</title>
+    <link>https://https://theabsnt.github.io/malware-analysis/steamhide-analysis/part02</link>
+    <guid>https://https://theabsnt.github.io/malware-analysis/steamhide-analysis/part02</guid>
+    <description><![CDATA[ Welcome back :D, This post is the continuation of SteamHide malware analysis, here we’ll go through the second stage FinalMalware.exe dropped by Hide binary inside image.exe downloader by decrypting the ICC profile after pulling out image from stream profile images. ]]></description>
+    <pubDate>Fri, 30 Aug 2024 09:22:23 GMT</pubDate>
+  </item><item>
+    <title>SteamHide Malware Analysis : Part I</title>
+    <link>https://https://theabsnt.github.io/malware-analysis/steamhide-analysis/part01</link>
+    <guid>https://https://theabsnt.github.io/malware-analysis/steamhide-analysis/part01</guid>
+    <description><![CDATA[ What’s this blog This post explores an interesting malware SteamHide which abuses Steam servers to host malware within steam profile images to serve payloads for malware downloaders. ]]></description>
+    <pubDate>Fri, 30 Aug 2024 06:21:36 GMT</pubDate>
+  </item><item>
+    <title>Zero2Auto : CH03 Practical Analysis Challenge - Part II</title>
+    <link>https://https://theabsnt.github.io/z2a-ch03-challenge/part02</link>
+    <guid>https://https://theabsnt.github.io/z2a-ch03-challenge/part02</guid>
+    <description><![CDATA[ Analysing Stage02 of CH03 Challenge binary ]]></description>
+    <pubDate>Mon, 14 Aug 2023 10:16:46 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
